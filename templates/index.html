@@ -13,6 +13,13 @@
 	</head>
 
 	<body>
+		<div id="navigationBar" align="center">ShopLikes</div>	
+		<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 		<div id="Main-Content">
 			<div class="Container">
 				<div class="flipster">
@@ -58,8 +65,27 @@
 		<!--
 
 			$(function(){ $(".flipster").flipster({ style: 'carousel', start: 0 }); });
-			
+
 		-->
 		</script>
+		<script>
+  			window.fbAsyncInit = function() {
+    			FB.init({
+      			appId      : '1427414634188096',
+      			xfbml      : true,
+      			version    : 'v2.1'
+    			});
+  			};
+
+  			(function(d, s, id){
+     			var js, fjs = d.getElementsByTagName(s)[0];
+     			if (d.getElementById(id)) {return;}
+     			js = d.createElement(s); js.id = id;
+     			js.src = "//connect.facebook.net/en_US/sdk.js";
+     			fjs.parentNode.insertBefore(js, fjs);
+   			}(document, 'script', 'facebook-jssdk'));
+
+		</script>
+
 	</body>
 </html>
