@@ -8,12 +8,6 @@
 *  - LESS from Bootstrap v2.3.1
 */
 
-#Main-Content {
-  background-color: #00ff00
-}
-#Container {
-  background-color: #0000ff 
-}
 
 #navigationBar {
   font-family: Helvetica, Sans-Serif;
@@ -253,7 +247,7 @@ body {
 }
 .Button.Block {
   padding: 20px 40px;
-  width: 300px;
+  width: 200px;
   height: 200px;
 }
 .Button h1 {
