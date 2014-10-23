@@ -14,7 +14,7 @@
 
 	<body>
 		<div id="navigationBar" align="center">
-			<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+			<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
 		</div>	
 		<div id="Main-Content">
 			<div class="Container">
@@ -66,10 +66,10 @@
 		</script>
 		<script>
   			window.fbAsyncInit = function() {
-    			FB.init({
-      			appId      : '1427414634188096',
-      			xfbml      : true,
-      			version    : 'v2.1'
+	    			FB.init({
+	      			appId      : '1485658648363694',
+	      			xfbml      : true,
+	      			version    : 'v2.1'
     			});
   			};
 
@@ -80,8 +80,6 @@
      			js.src = "//connect.facebook.net/en_US/sdk.js";
      			fjs.parentNode.insertBefore(js, fjs);
    			}(document, 'script', 'facebook-jssdk'));
-
 		</script>
-
 	</body>
 </html>
