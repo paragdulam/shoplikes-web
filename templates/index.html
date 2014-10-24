@@ -9,6 +9,7 @@
 		<!-- Include jQuery and UI -->
 		<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.6.2.min.js')}}"></script>
 		<script type="text/javascript" src="{{url_for('static', filename='js/jquery-ui-1.8.9.custom.min.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='res/random_likes.json')}}"></script>
 		
 		<!-- Include jQuery CoverFlow widget -->
 		<script type="text/javascript" src="{{url_for('static', filename='js/ui.coverflow.js')}}"></script>
@@ -93,15 +94,10 @@
 		    if (response.status === 'connected') {
 		      // Logged into your app and Facebook.
 		      testAPI();
-		    } else if (response.status === 'not_authorized') {
-		      // The person is logged into Facebook, but not your app.
-		      document.getElementById('status').innerHTML = 'Please log ' +
-		        'into this app.';
 		    } else {
 		      // The person is not logged into Facebook, so we're not sure if
 		      // they are logged into this app or not.
-		      document.getElementById('status').innerHTML = 'Please log ' +
-		        'into Facebook.';
+		      showInitialScreen();
 		    }
 		  }
 
@@ -182,6 +178,35 @@
 		    document.getElementById('coverflow').innerHTML = innerHTML;
 		    });
 		  }
+
+		  //Read External JSON File
+
+		   function loadJSON() {   
+	    		var xobj = new XMLHttpRequest();
+	        	xobj.overrideMimeType("application/json");
+				xobj.open('GET', "{{url_for('static',filename='res/random_likes.json')}}", true); // Replace 'my_data' with the path to your file
+				xobj.onreadystatechange = function () {
+	          	if (xobj.readyState == 4 && xobj.status == "200") {
+	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+    				  	var random_likes = JSON.parse(xobj.responseText); 
+					  	var innerHTML = '';
+					    for (var i = 0; i < random_likes.length; i++) {
+					    	var like = random_likes[i];
+					    	innerHTML += '<img src="'+ like.picture.data.url +'" data-artist="'+ like.name +'" data-album="'+ like.category +'"/>';
+					    }
+					    console.log(innerHTML);
+					    document.getElementById('coverflow').innerHTML = innerHTML;
+	          		}
+	    		};
+	    		xobj.send(null);  
+ 			}
+
+
+		  //Show Initial Screen
+		  function showInitialScreen() {
+		  	loadJSON();
+		  }
+
 		</script>
 	</head>
 
