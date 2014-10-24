@@ -81,74 +81,7 @@
 	});
 	</script>
 
-
-	</head>
-
-	<body>
-		<div id="navigationBar" align="center">
-			<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
-		</div>	
-
-		<div class="pageWrapper">
-		<div class="demo">
-		<div class="wrapper">
-			<div id="coverflow">
-	            <img src="img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
-				<img src="img/kingsofleon-comearoundsunshine.jpg" data-artist="Kings Of Leon" data-album="Come Around Sunshine"/>
-				<img src="img/kidrock-bornfree.jpg" data-artist="Kid Rock" data-album="Born Free"/>		
-				<img src="img/recovery-recovery.jpg" data-artist="Eminem" data-album="Recovery"/>
-				<img src="img/lilwayne-iamnotahumanbeing.jpg" data-artist="Lil Wayne" data-album="I Am Not A Human Being"/>
-				<img src="img/taylorswift-speaknow.jpg" data-artist="Taylor Swift" data-album="Speak Now"/>
-				<img src="img/thebandperry-thebandperry.jpg" data-artist="The Band Perry" data-album="The Band Perry"/>
-				<img src="img/maroon5-handsallover.jpg" data-artist="Maroon 5" data-album="Hands All Over"/>
-				<img src="img/mychemicalromance-dangerdays.jpg" data-artist="My Chemical Romance" data-album="Danger Days"/>
-				<img src="img/ironmaiden-thefinalfrontier.jpg" data-artist="Iron Maiden" data-album="The Final Frontier"/>
-				<img src="img/order of the black - black label society.jpg" data-artist="Order Of The Black" data-album="Black Label Society"/>	
-				<img src="img/usher-raymondvraymond.jpg" data-artist="Usher" data-album="Raymond V Raymond"/>
-			</div>
-		</div>
-
-		<div id="imageCaption">
-		Sample Text
-		</div>
-
-
-		<div id='slider'></div>
-		</div>
-
-
-		<div class="demo-description">
-		</div>
-
-		<div class="listholder">
-		<div id="scroll-pane">
-		    <ul id="sortable"> 
-		    </ul>
-		</div>
-
-		<div id="slider-wrap">
-		<div id="slider-vertical"></div>
-	</div>
-</div>
-
-<div class="pageInfo"> 
- Interaction supported: Cover-click, Slider, Playlist-click, Bi-Directional Keyboard Navigation, Mouse-Slide, MouseWheel.
- 
- 
- <div style="margin-top: 20px; padding: 0pt 0.7em;" class="ui-state-highlight ui-corner-all"> 
-					<p><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
-					  Compatible with jQueryUI 1.8.9 and jQuery 1.6.2+
-					</p>
-  </div>
-				
-				
-</div>
-
-
-</div>
-
-
-		<script>
+	<script>
 		  // This is called with the results from from FB.getLoginStatus().
 		  function statusChangeCallback(response) {
 		    console.log('statusChangeCallback');
@@ -217,12 +150,27 @@
 		    fjs.parentNode.insertBefore(js, fjs);
 		  }(document, 'script', 'facebook-jssdk'));
 
+
+		  //logout function
+		  function logout() {
+		  	FB.logout(function(response) {
+		  		checkLoginState();
+		  	});
+		  }
+
 		  // Here we run a very simple test of the Graph API after login is
 		  // successful.  See statusChangeCallback() for when this call is made.
 		  function testAPI() {
 		    console.log('Welcome!  Fetching your information.... ');
-		    FB.api('/me/likes?fields=id,name,picture,created_time,link
-		    	,category', function(response) {
+
+		    FB.api('/me?fields=id,name,picture', function(response) {
+		    	console.log(response);
+		    	var innerHTML = '';
+		    	innerHTML += '<img src="'+ response.picture.data.url +'" onclick="logout();"/>';
+		    	document.getElementById('navigationBar').innerHTML = innerHTML;
+		    });
+
+		    FB.api('/me/likes?fields=id,name,picture,created_time,link,category', function(response) {
 		      console.log(response);
 		      //<img src="img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
 		    var innerHTML = '';
@@ -235,6 +183,72 @@
 		    });
 		  }
 		</script>
+	</head>
 
+	<body>
+		<div id="navigationBar" align="center">ShopLikes
+			<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="FB.login();"/>
+			<!--
+				<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
+			-->
+		</div>	
+
+		<div class="pageWrapper">
+		<div class="demo">
+		<div class="wrapper">
+			<div id="coverflow">
+	            <img src="img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
+				<img src="img/kingsofleon-comearoundsunshine.jpg" data-artist="Kings Of Leon" data-album="Come Around Sunshine"/>
+				<img src="img/kidrock-bornfree.jpg" data-artist="Kid Rock" data-album="Born Free"/>		
+				<img src="img/recovery-recovery.jpg" data-artist="Eminem" data-album="Recovery"/>
+				<img src="img/lilwayne-iamnotahumanbeing.jpg" data-artist="Lil Wayne" data-album="I Am Not A Human Being"/>
+				<img src="img/taylorswift-speaknow.jpg" data-artist="Taylor Swift" data-album="Speak Now"/>
+				<img src="img/thebandperry-thebandperry.jpg" data-artist="The Band Perry" data-album="The Band Perry"/>
+				<img src="img/maroon5-handsallover.jpg" data-artist="Maroon 5" data-album="Hands All Over"/>
+				<img src="img/mychemicalromance-dangerdays.jpg" data-artist="My Chemical Romance" data-album="Danger Days"/>
+				<img src="img/ironmaiden-thefinalfrontier.jpg" data-artist="Iron Maiden" data-album="The Final Frontier"/>
+				<img src="img/order of the black - black label society.jpg" data-artist="Order Of The Black" data-album="Black Label Society"/>	
+				<img src="img/usher-raymondvraymond.jpg" data-artist="Usher" data-album="Raymond V Raymond"/>
+			</div>
+		</div>
+
+		<div id="imageCaption">
+		Sample Text
+		</div>
+
+
+		<div id='slider'></div>
+		</div>
+
+
+		<div class="demo-description">
+		</div>
+
+		<div class="listholder">
+		<div id="scroll-pane">
+		    <ul id="sortable"> 
+		    </ul>
+		</div>
+
+		<div id="slider-wrap">
+		<div id="slider-vertical"></div>
+	</div>
+</div>
+
+<div class="pageInfo"> 
+ Interaction supported: Cover-click, Slider, Playlist-click, Bi-Directional Keyboard Navigation, Mouse-Slide, MouseWheel.
+ 
+ 
+ <div style="margin-top: 20px; padding: 0pt 0.7em;" class="ui-state-highlight ui-corner-all"> 
+					<p><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
+					  Compatible with jQueryUI 1.8.9 and jQuery 1.6.2+
+					</p>
+  </div>
+				
+				
+</div>
+
+
+</div>
 	</body>
 </html>
