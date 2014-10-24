@@ -14,7 +14,7 @@
 
 	<body>
 		<div id="navigationBar" align="center">
-			<fb:login-button id="status" scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
+			<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
 		</div>	
 		<div id="Main-Content">
 			<div class="Container">
@@ -142,11 +142,12 @@
 		    var innerHTML = '<ul>';
 		    for (var i = 0; i < response.data.length; i++) {
 		    	var like = response.data[i];
-		    	innerHTML += '<li><img src="'+ like.picture.data.url +'"></img></li>'
+		    	innerHTML += '<li><div><img src="'+ like.picture.data.url +'"></img></div></li>'
 		    }
 		    innerHTML += '</ul>';
 		    console.log(innerHTML);
-		      document.getElementById('flipster').innerHTML = innerHTML;
+		      document.getElementsByClassName('flipster').innerHTML = innerHTML;
+		      $(function(){ $(".flipster").flipster({ style: 'carousel', start: 0 }); });
 		    });
 		  }
 		</script>
