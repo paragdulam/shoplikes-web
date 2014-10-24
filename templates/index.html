@@ -1,69 +1,153 @@
 <doctype html>
 <html class="no-js">
 	<head>
-		<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <title>ShopLikes</title>
-	    <meta name="description" content="">
-	    <meta name="viewport" content="width=550, initial-scale=1">
+	    <link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='css/demos.css')}}"/>
+	   	<link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='css/jquery-ui-1.8.5.custom.css')}}"/>
 
-	    <link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='css/demo.css')}}"/>
-	    <link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='css/jquery.flipster.css')}}"/>
-	    <link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='css/flipsternavtabs.css')}}"/>
+	
+		<!-- Include jQuery and UI -->
+		<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.6.2.min.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='js/jquery-ui-1.8.9.custom.min.js')}}"></script>
+		
+		<!-- Include jQuery CoverFlow widget -->
+		<script type="text/javascript" src="{{url_for('static', filename='js/ui.coverflow.js')}}"></script>
+		
+		<!-- Transformie is a plugin that makes webkit's CSS transforms work in Internet Explorer -->
+		<script type="text/javascript" src="{{url_for('static', filename='js/sylvester.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='js/transformie.js')}}"></script>
+		
+		<!-- Include mousewheel dependancies and app files -->
+		<script src="{{url_for('static', filename='js/jquery.mousewheel.min.js')}}" type="text/javascript"></script>
+		<script src="{{url_for('static', filename='js/app.js')}}" type="text/javascript"></script>
+		<script type="text/javascript">
+	$(function(){	
+
+		
+		var demo = {
+
+			yScroll: function(wrapper, scrollable) {
+
+				var wrapper = $(wrapper), scrollable = $(scrollable),
+					loading = $('<div class="loading">Loading...</div>').appendTo(wrapper),
+					internal = null,
+					images	= null;
+					scrollable.hide();
+					images = scrollable.find('img');
+					completed = 0;
+					
+					images.each(function(){
+						if (this.complete) completed++;	
+					});
+					
+					if (completed == images.length){
+						setTimeout(function(){							
+							loading.hide();
+							wrapper.css({overflow: 'hidden'});						
+							scrollable.slideDown('slow', function(){
+								enable();	
+							});					
+						}, 0);	
+					}
+			
+				
+				function enable(){
+					var inactiveMargin = 99,
+						wrapperWidth = wrapper.width(),
+						wrapperHeight = wrapper.height(),
+						scrollableHeight = scrollable.outerHeight() + 2*inactiveMargin,
+						wrapperOffset = 0,
+						top = 0,
+						lastTarget = null;
+
+					
+					wrapper.mousemove(function(e){
+						lastTarget = e.target;
+						wrapperOffset = wrapper.offset();		
+						top = (e.pageY -  wrapperOffset.top) * (scrollableHeight - wrapperHeight) / wrapperHeight - inactiveMargin;
+						if (top < 0){
+							top = 0;
+						}			
+						wrapper.scrollTop(top);
+					});	
+				}			
+			}
+		}
+
+		
+		demo.yScroll('#scroll-pane', 'ul#sortable');
+
+			
+	});
+	</script>
+
+
 	</head>
 
 	<body>
 		<div id="navigationBar" align="center">
 			<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
 		</div>	
-		<div id="Main-Content">
-			<div class="Container">
-				<div class="flipster">
-					<ul>
-			  			<li>
-			  				<a href="demo.html" class="Button Block">
-			  				<h1>All Features</h1>
-			  				<p>Showcase of all available features in both the Coverflow and Carousel styles</p>
-			  				</a>
-			  			</li>
-		  				<li>
-		  					<a href="demo2.html" class="Button Block">
-			  				<h1>Basic Setup</h1>
-			  				<p>The bare minimum code needed to implement Flipster</p>
-		  					</a>
-		  				</li>
-		  				<li>
-		  					<a href="demo3.html" class="Button Block">
-			  				<h1>Carousel</h1>
-			  				<p>Roundabout carousel style!</p>
-			  				</a>
-		  				</li>
-		  				<li>
-		  					<a href="demo4.html" class="Button Block">
-			  				<h1>Coverflow with Tab Navigation</h1>
-			  				<p>Example of tab navigation using the <code>enableNav</code> option</p>
-		  					</a>
-		  				</li>
-		  				<li>
-		  					<a href="demo5.html" class="Button Block">
-			  				<h1>Carousel with Tab Navigation</h1>
-			  				<p>Example of tab navigation using the <code>enableNav</code> option</p>
-			  				</a>
-		  				</li>
-		  			</ul>
-				</div>
+
+		<div class="pageWrapper">
+		<div class="demo">
+		<div class="wrapper">
+			<div id="coverflow">
+	            <img src="img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
+				<img src="img/kingsofleon-comearoundsunshine.jpg" data-artist="Kings Of Leon" data-album="Come Around Sunshine"/>
+				<img src="img/kidrock-bornfree.jpg" data-artist="Kid Rock" data-album="Born Free"/>		
+				<img src="img/recovery-recovery.jpg" data-artist="Eminem" data-album="Recovery"/>
+				<img src="img/lilwayne-iamnotahumanbeing.jpg" data-artist="Lil Wayne" data-album="I Am Not A Human Being"/>
+				<img src="img/taylorswift-speaknow.jpg" data-artist="Taylor Swift" data-album="Speak Now"/>
+				<img src="img/thebandperry-thebandperry.jpg" data-artist="The Band Perry" data-album="The Band Perry"/>
+				<img src="img/maroon5-handsallover.jpg" data-artist="Maroon 5" data-album="Hands All Over"/>
+				<img src="img/mychemicalromance-dangerdays.jpg" data-artist="My Chemical Romance" data-album="Danger Days"/>
+				<img src="img/ironmaiden-thefinalfrontier.jpg" data-artist="Iron Maiden" data-album="The Final Frontier"/>
+				<img src="img/order of the black - black label society.jpg" data-artist="Order Of The Black" data-album="Black Label Society"/>	
+				<img src="img/usher-raymondvraymond.jpg" data-artist="Usher" data-album="Raymond V Raymond"/>
 			</div>
 		</div>
 
-		<script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
-		<script type="text/javascript" src="{{url_for('static', filename='js/jquery.flipster.js')}}"></script>
-		<script type="text/javascript">
-		<!--
+		<div id="imageCaption">
+		Sample Text
+		</div>
 
-			$(function(){ $(".flipster").flipster({ style: 'carousel', start: 0 }); });
 
-		-->
-		</script>
+		<div id='slider'></div>
+		</div>
+
+
+		<div class="demo-description">
+		</div>
+
+		<div class="listholder">
+		<div id="scroll-pane">
+		    <ul id="sortable"> 
+		    </ul>
+		</div>
+
+		<div id="slider-wrap">
+		<div id="slider-vertical"></div>
+	</div>
+</div>
+
+<div class="pageInfo"> 
+ Interaction supported: Cover-click, Slider, Playlist-click, Bi-Directional Keyboard Navigation, Mouse-Slide, MouseWheel.
+ 
+ 
+ <div style="margin-top: 20px; padding: 0pt 0.7em;" class="ui-state-highlight ui-corner-all"> 
+					<p><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
+					  Compatible with jQueryUI 1.8.9 and jQuery 1.6.2+
+					</p>
+  </div>
+				
+				
+</div>
+
+
+</div>
+
+
 		<script>
 		  // This is called with the results from from FB.getLoginStatus().
 		  function statusChangeCallback(response) {
@@ -137,17 +221,17 @@
 		  // successful.  See statusChangeCallback() for when this call is made.
 		  function testAPI() {
 		    console.log('Welcome!  Fetching your information.... ');
-		    FB.api('/me/likes?fields=id,name,picture,created_time,category', function(response) {
+		    FB.api('/me/likes?fields=id,name,picture,created_time,link
+		    	,category', function(response) {
 		      console.log(response);
-		    var innerHTML = '<ul>';
+		      //<img src="img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
+		    var innerHTML = '';
 		    for (var i = 0; i < response.data.length; i++) {
 		    	var like = response.data[i];
-		    	innerHTML += '<li><div><img src="'+ like.picture.data.url +'"></img></div></li>'
+		    	innerHTML += '<img src="'+ like.picture.data.url +'" data-artist="'+ like.name +'" data-album="'+ like.category +'"/>';
 		    }
-		    innerHTML += '</ul>';
 		    console.log(innerHTML);
-		      document.getElementsByClassName('flipster').innerHTML = innerHTML;
-		      $(function(){ $(".flipster").flipster({ style: 'carousel', start: 0 }); });
+		    document.getElementById('coverflow').innerHTML = innerHTML;
 		    });
 		  }
 		</script>
