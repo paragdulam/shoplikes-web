@@ -2,86 +2,13 @@
 <html class="no-js">
 	<head>
 	    <title>ShopLikes</title>
-	    <link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='css/demos.css')}}"/>
-	   	<link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='css/jquery-ui-1.8.5.custom.css')}}"/>
+	    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no maximum-scale=1">
+		<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='css/pure-nr-min.css')}}">
+		<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='css/style.css')}}">
 
-	
-		<!-- Include jQuery and UI -->
-		<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.6.2.min.js')}}"></script>
-		<script type="text/javascript" src="{{url_for('static', filename='js/jquery-ui-1.8.9.custom.min.js')}}"></script>
-		<script type="text/javascript" src="{{url_for('static', filename='res/random_likes.json')}}"></script>
-		
-		<!-- Include jQuery CoverFlow widget -->
-		<script type="text/javascript" src="{{url_for('static', filename='js/ui.coverflow.js')}}"></script>
-		
-		<!-- Transformie is a plugin that makes webkit's CSS transforms work in Internet Explorer -->
-		<script type="text/javascript" src="{{url_for('static', filename='js/sylvester.js')}}"></script>
-		<script type="text/javascript" src="{{url_for('static', filename='js/transformie.js')}}"></script>
-		
-		<!-- Include mousewheel dependancies and app files -->
-		<script src="{{url_for('static', filename='js/jquery.mousewheel.min.js')}}" type="text/javascript"></script>
-		<script src="{{url_for('static', filename='js/app.js')}}" type="text/javascript"></script>
-		<script type="text/javascript">
-	$(function(){	
-
-		
-		var demo = {
-
-			yScroll: function(wrapper, scrollable) {
-
-				var wrapper = $(wrapper), scrollable = $(scrollable),
-					loading = $('<div class="loading">Loading...</div>').appendTo(wrapper),
-					internal = null,
-					images	= null;
-					scrollable.hide();
-					images = scrollable.find('img');
-					completed = 0;
-					
-					images.each(function(){
-						if (this.complete) completed++;	
-					});
-					
-					if (completed == images.length){
-						setTimeout(function(){							
-							loading.hide();
-							wrapper.css({overflow: 'hidden'});						
-							scrollable.slideDown('slow', function(){
-								enable();	
-							});					
-						}, 0);	
-					}
-			
-				
-				function enable(){
-					var inactiveMargin = 99,
-						wrapperWidth = wrapper.width(),
-						wrapperHeight = wrapper.height(),
-						scrollableHeight = scrollable.outerHeight() + 2*inactiveMargin,
-						wrapperOffset = 0,
-						top = 0,
-						lastTarget = null;
-
-					
-					wrapper.mousemove(function(e){
-						lastTarget = e.target;
-						wrapperOffset = wrapper.offset();		
-						top = (e.pageY -  wrapperOffset.top) * (scrollableHeight - wrapperHeight) / wrapperHeight - inactiveMargin;
-						if (top < 0){
-							top = 0;
-						}			
-						wrapper.scrollTop(top);
-					});	
-				}			
-			}
-		}
-
-		
-		demo.yScroll('#scroll-pane', 'ul#sortable');
-
-			
-	});
-	</script>
-
+		<script type="text/javascript" src="{{url_for('static', filename='js/raf.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='js/coverflow.js')}}"></script>
 	<script>
 		  // This is called with the results from from FB.getLoginStatus().
 		  function statusChangeCallback(response) {
@@ -217,63 +144,17 @@
 				<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
 			-->
 		</div>	
+		  <div class="pure-g cover" id="content">
+      		<img id="0" src="{{url_for('static', filename='images/winter.jpg')}}">
+      		<img id="1" src="{{url_for('static', filename='images/14.jpg')}}">
+      		<img id="2" src="{{url_for('static', filename='images/cloudatlas.jpg')}}">
+      		<img id="3" src="{{url_for('static', filename='images/dancewithdragons.jpg')}}">
+      		<img id="4" src="{{url_for('static', filename='images/fiftyshades.jpg')}}">
+      		<img id="5" src="{{url_for('static', filename='images/greatgatsby.jpg')}}">
+      		<img id="6" src="{{url_for('static', filename='images/inferno.jpg')}}">
+      		<img id="7" src="{{url_for('static', filename='images/koban.jpg')}}">
+      		<img id="8" src="{{url_for('static', filename='images/renegade.jpg')}}">
+  		</div>
 
-		<div class="pageWrapper">
-		<div class="demo">
-		<div class="wrapper">
-			<div id="coverflow">
-	            <img src="img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
-				<img src="img/kingsofleon-comearoundsunshine.jpg" data-artist="Kings Of Leon" data-album="Come Around Sunshine"/>
-				<img src="img/kidrock-bornfree.jpg" data-artist="Kid Rock" data-album="Born Free"/>		
-				<img src="img/recovery-recovery.jpg" data-artist="Eminem" data-album="Recovery"/>
-				<img src="img/lilwayne-iamnotahumanbeing.jpg" data-artist="Lil Wayne" data-album="I Am Not A Human Being"/>
-				<img src="img/taylorswift-speaknow.jpg" data-artist="Taylor Swift" data-album="Speak Now"/>
-				<img src="img/thebandperry-thebandperry.jpg" data-artist="The Band Perry" data-album="The Band Perry"/>
-				<img src="img/maroon5-handsallover.jpg" data-artist="Maroon 5" data-album="Hands All Over"/>
-				<img src="img/mychemicalromance-dangerdays.jpg" data-artist="My Chemical Romance" data-album="Danger Days"/>
-				<img src="img/ironmaiden-thefinalfrontier.jpg" data-artist="Iron Maiden" data-album="The Final Frontier"/>
-				<img src="img/order of the black - black label society.jpg" data-artist="Order Of The Black" data-album="Black Label Society"/>	
-				<img src="img/usher-raymondvraymond.jpg" data-artist="Usher" data-album="Raymond V Raymond"/>
-			</div>
-		</div>
-
-		<div id="imageCaption">
-		Sample Text
-		</div>
-
-
-		<div id='slider'></div>
-		</div>
-
-
-		<div class="demo-description">
-		</div>
-
-		<div class="listholder">
-		<div id="scroll-pane">
-		    <ul id="sortable"> 
-		    </ul>
-		</div>
-
-		<div id="slider-wrap">
-		<div id="slider-vertical"></div>
-	</div>
-</div>
-
-<div class="pageInfo"> 
- Interaction supported: Cover-click, Slider, Playlist-click, Bi-Directional Keyboard Navigation, Mouse-Slide, MouseWheel.
- 
- 
- <div style="margin-top: 20px; padding: 0pt 0.7em;" class="ui-state-highlight ui-corner-all"> 
-					<p><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
-					  Compatible with jQueryUI 1.8.9 and jQuery 1.6.2+
-					</p>
-  </div>
-				
-				
-</div>
-
-
-</div>
 	</body>
 </html>
