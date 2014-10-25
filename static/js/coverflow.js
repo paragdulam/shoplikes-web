@@ -6,6 +6,7 @@ window.onload = function () {
         xform, frame, timestamp, ticker;
 
     function initialize() {
+        console.log('initialize');
         pressed = false;
         timeConstant = 250; // ms
         dim = 200;
