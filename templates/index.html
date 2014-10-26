@@ -115,11 +115,12 @@
 					  	var innerHTML = '';
 					    for (var i = 0; i < random_likes.length; i++) {
 					    	var like = random_likes[i];
-					    	innerHTML += '<img id="'+i+'" src="'+ like.picture.data.url +'">'+like.name+'</img>';
+					    	innerHTML += '<img id="'+i+'" src="'+ like.picture.data.url +'"></img>';
 					    	// var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
 					    	// innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
 					    }
 					    document.getElementById('content').innerHTML = innerHTML;
+					    finalCount = random_likes.length;
 					    window.onload();
 	          		}
 	    		};

@@ -1,3 +1,4 @@
+var finalCount;
 window.onload = function () {
     'use strict';
 
@@ -14,7 +15,7 @@ window.onload = function () {
         angle = -60;
         dist = -150;
         shift = 10;
-        count = 9;
+        count = finalCount;
         images = [];
         while (images.length < count) {
             images.push(document.getElementById(images.length));
@@ -58,7 +59,7 @@ window.onload = function () {
         tween = -dir * delta * 2 / dim;
 
         alignment = 'translateX(' + (innerWidth - dim) / 2 + 'px) ';
-        alignment += 'translateY(' + (innerHeight - dim) / 2 + 'px)';
+        //alignment += 'translateY(' + (innerHeight - dim) / 2 + 'px)';
 
         // center
         el = images[wrap(center)];
