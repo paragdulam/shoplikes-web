@@ -9,8 +9,17 @@ aside {
     width: 100%;
 }
 
+#table_view table {
+     height: 300px; /* Random number I chose */
+     overflow: scroll; 
+}
+
 #table_view {
-    top: 210px;
+    margin-top: 250px;
+    margin-left: 128px;
+    background: #FFFFFF;
+    width: 80%;
+    vertical-align: middle;
 }
 
 #facebook {
@@ -25,7 +34,6 @@ aside {
   font-family: Helvetica, Sans-Serif;
   font-size: 15pt;
   text-align: center;
-  vertical-align: middle;
   margin: 0;
   padding: 0;
   border: 0;

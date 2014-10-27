@@ -7,7 +7,6 @@
 		<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='css/pure-nr-min.css')}}">
 		<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='css/style.css')}}">
 
-		<script type="text/javascript" src="{{url_for('static', filename='js/raf.js')}}"></script>
 		<script type="text/javascript" src="{{url_for('static', filename='js/coverflow.js')}}"></script>
 	<script>
 		  // This is called with the results from from FB.getLoginStatus().
@@ -103,7 +102,46 @@
 		    });
 		  }
 
+		  function _cb_findItemsByKeywords(root) {
+		  	console.log('root');
+		  	console.log(root);
+		  	var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
+		  	var innerHTML = '<table>';
+  			for (var i = 0; i < items.length; ++i) {
+    			var item     = items[i];
+    			var title    = item.title;
+    			var pic      = item.galleryURL;
+    			var viewitem = item.viewItemURL;
+    			if (null != title && null != viewitem) {
+      				innerHTML += '<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' + '<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td></tr>';
+    		}
+		  }
+  			innerHTML += '</table>'
+  			document.getElementById("table_view").innerHTML = innerHTML;
+		} 
+
 		  //Read External JSON File
+		  	function loadProductsForLike(like) {   
+	    		// var xobj = new XMLHttpRequest();
+	    		// xobj.overrideMimeType("application/json");
+	    		// xobj.overrideMimeType('text/plain; charset=x-user-defined');
+	    		// xobj.responseType = '';
+	    		var base_url = "http://svcs.ebay.com/services/search/FindingService/v1?";
+	    		var params = 'OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=SapnaSol-b016-439b-ba9f-0a88df89de2e&RESPONSE-DATA-FORMAT=JSON&keywords='+like.name+'&outputSelector(0)=galleryPlusPictureURL&itemFilter(0).name=ListingType&itemFilter(0).value=FixedPrice&callback=_cb_findItemsByKeywords';
+	    		var s = document.createElement('script'); // create script element
+				s.src= base_url+params;
+				console.log(s);
+				document.body.appendChild(s);
+				// xobj.open('GET', base_url + params, true); // Replace 'my_data' with the path to your file
+				// xobj.onreadystatechange = function () {
+	   //        	if (xobj.readyState == 4 && xobj.status == "200") {
+	   //          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+	   //          		console.log(xobj.responseText);
+	   //        		}
+	   //  		};
+	   //  		xobj.send(null);  
+ 			}
+
 
 		   function loadJSON() {   
 	    		var xobj = new XMLHttpRequest();
@@ -113,6 +151,10 @@
 	          	if (xobj.readyState == 4 && xobj.status == "200") {
 	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
     				  	var random_likes = JSON.parse(xobj.responseText); 
+    				  	if (random_likes.length) {
+    				  		var like = random_likes[0];
+    				  		loadProductsForLike(like);
+    				  	};
 					  	var innerHTML = '';
 					    for (var i = 0; i < random_likes.length; i++) {
 					    	var like = random_likes[i];
@@ -139,13 +181,10 @@
 	</head>
 
 	<body>
-		<div id="navigationBar" align="center">ShopLikes
-			<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="FB.login();"/>
-			<!--
-				<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
-			-->
-		</div>	
 		<div id="main_content">
+			<div id="navigationBar" align="center">ShopLikes
+				<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="FB.login();"/>
+			</div>	
 			<div class="pure-g cover" id="content">
 	      		<img id="0" src="{{url_for('static', filename='images/winter.jpg')}}">
 	      		<img id="1" src="{{url_for('static', filename='images/14.jpg')}}">
@@ -159,10 +198,6 @@
 	  		</div>
 	  		<div id="table_view">
 	  			<table>
-  					<tr>
-    					<th>Month</th>
-    					<th>Savings</th>
-  					</tr>
   					<tr>
     					<td>January</td>
     					<td>$100</td>
