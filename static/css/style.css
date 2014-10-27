@@ -9,9 +9,32 @@ aside {
     width: 100%;
 }
 
-#table_view table {
+#table_view {
      height: 300px; /* Random number I chose */
-     overflow: scroll; 
+     overflow: auto; 
+}
+
+#title_text {
+    margin-left: 95px;
+    margin-top: 5px;
+}
+
+#subtitle_text {
+    margin-left: 95px;
+    margin-top: 5px;
+}
+
+
+.product_cell {
+    width: 100%;
+    height: 100px;
+}
+
+.product_cell_image {
+    height: 90%;
+    width: 90px;
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
 #table_view {

@@ -106,17 +106,17 @@
 		  	console.log('root');
 		  	console.log(root);
 		  	var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
-		  	var innerHTML = '<table>';
+		  	//<div class="product_cell"><img class="product_cell_image" src="{{url_for('static', filename='images/winter.jpg')}}"></div>
+		  	var innerHTML = '';
   			for (var i = 0; i < items.length; ++i) {
     			var item     = items[i];
     			var title    = item.title;
     			var pic      = item.galleryURL;
     			var viewitem = item.viewItemURL;
     			if (null != title && null != viewitem) {
-      				innerHTML += '<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' + '<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td></tr>';
+      				innerHTML += '<div class="product_cell"><img class="product_cell_image" src="' + pic + '"</div>';
     		}
 		  }
-  			innerHTML += '</table>'
   			document.getElementById("table_view").innerHTML = innerHTML;
 		} 
 
@@ -197,12 +197,10 @@
 	      		<img id="8" src="{{url_for('static', filename='images/renegade.jpg')}}">
 	  		</div>
 	  		<div id="table_view">
-	  			<table>
-  					<tr>
-    					<td>January</td>
-    					<td>$100</td>
-  					</tr>
-				</table>
+	  			<div class="product_cell"><img class="product_cell_image" src="{{url_for('static', filename='images/winter.jpg')}}"><div class="title_text">Parag</div><div class="subtitle_text">Dulam</div></div>
+	  			<div class="product_cell"><img class="product_cell_image" src="{{url_for('static', filename='images/winter.jpg')}}"></div>
+	  			<div class="product_cell"><img class="product_cell_image" src="{{url_for('static', filename='images/winter.jpg')}}"></div>
+	  			<div class="product_cell"><img class="product_cell_image" src="{{url_for('static', filename='images/winter.jpg')}}"></div>
 	  		</div>
 		</div>
 
