@@ -59,7 +59,7 @@ window.onload = function () {
         tween = -dir * delta * 2 / dim;
 
         alignment = 'translateX(' + (innerWidth - dim) / 2 + 'px) ';
-        //alignment += 'translateY(' + (innerHeight - dim) / 2 + 'px)';
+        alignment += 'translateY(10px)';
 
         // center
         el = images[wrap(center)];

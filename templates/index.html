@@ -96,7 +96,8 @@
 		    var innerHTML = '';
 		    for (var i = 0; i < response.data.length; i++) {
 		    	var like = response.data[i];
-		    	innerHTML += '<img src="'+ like.picture.data.url +'"/>';
+		    	// innerHTML += '<img src="'+ like.picture.data.url +'"/>';
+		    	innerHTML += '<img id="'+i+'" src="'+ like.picture.data.url +'"></img>';;
 		    }
 		    document.getElementById('content').innerHTML = innerHTML;
 		    });
@@ -115,7 +116,8 @@
 					  	var innerHTML = '';
 					    for (var i = 0; i < random_likes.length; i++) {
 					    	var like = random_likes[i];
-					    	innerHTML += '<img id="'+i+'" src="'+ like.picture.data.url +'"></img>';
+					    	//https://graph.facebook.com/user_id/picture?type=large
+					    	innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
 					    	// var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
 					    	// innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
 					    }
@@ -143,16 +145,31 @@
 				<fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();"></fb:login-button>
 			-->
 		</div>	
-		<div class="pure-g cover" id="content">
-      		<img id="0" src="{{url_for('static', filename='images/winter.jpg')}}">
-      		<img id="1" src="{{url_for('static', filename='images/14.jpg')}}">
-      		<img id="2" src="{{url_for('static', filename='images/cloudatlas.jpg')}}">
-      		<img id="3" src="{{url_for('static', filename='images/dancewithdragons.jpg')}}">
-      		<img id="4" src="{{url_for('static', filename='images/fiftyshades.jpg')}}">
-      		<img id="5" src="{{url_for('static', filename='images/greatgatsby.jpg')}}">
-      		<img id="6" src="{{url_for('static', filename='images/inferno.jpg')}}">
-      		<img id="7" src="{{url_for('static', filename='images/koban.jpg')}}">
-      		<img id="8" src="{{url_for('static', filename='images/renegade.jpg')}}">
-  		</div>
+		<div id="main_content">
+			<div class="pure-g cover" id="content">
+	      		<img id="0" src="{{url_for('static', filename='images/winter.jpg')}}">
+	      		<img id="1" src="{{url_for('static', filename='images/14.jpg')}}">
+	      		<img id="2" src="{{url_for('static', filename='images/cloudatlas.jpg')}}">
+	      		<img id="3" src="{{url_for('static', filename='images/dancewithdragons.jpg')}}">
+	      		<img id="4" src="{{url_for('static', filename='images/fiftyshades.jpg')}}">
+	      		<img id="5" src="{{url_for('static', filename='images/greatgatsby.jpg')}}">
+	      		<img id="6" src="{{url_for('static', filename='images/inferno.jpg')}}">
+	      		<img id="7" src="{{url_for('static', filename='images/koban.jpg')}}">
+	      		<img id="8" src="{{url_for('static', filename='images/renegade.jpg')}}">
+	  		</div>
+	  		<div id="table_view">
+	  			<table>
+  					<tr>
+    					<th>Month</th>
+    					<th>Savings</th>
+  					</tr>
+  					<tr>
+    					<td>January</td>
+    					<td>$100</td>
+  					</tr>
+				</table>
+	  		</div>
+		</div>
+
 	</body>
 </html>
