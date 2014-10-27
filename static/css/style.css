@@ -4,11 +4,13 @@ aside {
     color: #fff;
 }
 
+#main_content {
+    height: 100%;
+    width: 100%;
+}
 
 #table_view {
-    position: absolute;
-    float:left; 
-    clear:left;    
+    top: 210px;
 }
 
 #facebook {
