@@ -4,6 +4,13 @@ aside {
     color: #fff;
 }
 
+/*
+
+. for class
+# for id
+
+*/
+
 #main_content {
     height: 100%;
     width: 100%;
@@ -14,22 +21,36 @@ aside {
     overflow: auto; 
 }
 
-#title_text {
+.title_text {
     margin-left: 100px;
-    margin-top: 5px;
+    margin-top: 10px;
+    font-family: Helvetica-Bold, Sans-Serif;
+    font-size: 16pt;
+    color: #000000;
+
 }
 
-#subtitle_text {
-    margin-left: 100px;
+.buy_button {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    margin-right: 5px;
     margin-bottom: 5px;
+    background: #00FF00;
+}
+.subtitle_text {
+    margin-left: 100px;
+    margin-top: 30px;
+    font-family: Helvetica, Sans-Serif;
+    font-style: italic;
+    font-size: 12pt;
+    color: #808080;
 }
 
 
 .product_cell {
     width: 100%;
     height: 100px;
-    border-bottom-style:solid;
-    border-bottom:1px;
 }
 
 .product_cell_image {
@@ -48,10 +69,10 @@ aside {
     background: #FFFFFF;
     width: 50%;
     vertical-align: middle;
-    border-radius: 5px;
+/*    border-radius: 5px;
     border-style: solid;
     border-width: 1px;
-}
+*/}
 
 #facebook {
     width: 30px;
