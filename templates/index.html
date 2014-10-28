@@ -106,7 +106,6 @@
 		  	console.log('root');
 		  	console.log(root);
 		  	var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
-		  	//<div class="product_cell"><img class="product_cell_image" src="{{url_for('static', filename='images/winter.jpg')}}"></div>
 		  	var innerHTML = '';
   			for (var i = 0; i < items.length; ++i) {
     			var item     = items[i];
@@ -114,7 +113,8 @@
     			var pic      = item.galleryURL;
     			var viewitem = item.viewItemURL;
     			if (null != title && null != viewitem) {
-      				innerHTML += '<div class="product_cell"><img class="product_cell_image" src="' + pic + '"</div>';
+    				// <div class="product_cell"><img class="product_cell_image" src="{{url_for('static', filename='images/winter.jpg')}}"><div class="title_text">Parag</div><div class="subtitle_text">Dulam</div></div>
+      				innerHTML += '<div class="product_cell"><img class="product_cell_image" src="' + pic + '"/><div class="title_text">'+title+'</div><div class="subtitle_text">'+'category'+'</div></div>';
     		}
 		  }
   			document.getElementById("table_view").innerHTML = innerHTML;
