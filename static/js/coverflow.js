@@ -1,4 +1,10 @@
 var finalCount;
+
+
+function didGetTheFinalIndex(index) {
+    console.log('index '+index);
+}
+
 window.onload = function () {
     'use strict';
 
@@ -7,7 +13,6 @@ window.onload = function () {
         xform, frame, timestamp, ticker;
 
     function initialize() {
-        console.log('initialize');
         pressed = false;
         timeConstant = 250; // ms
         dim = 200;
@@ -177,6 +182,7 @@ window.onload = function () {
 
         e.preventDefault();
         e.stopPropagation();
+        didGetTheFinalIndex(target/dim);
         return false;
     }
 
