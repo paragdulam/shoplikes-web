@@ -79,26 +79,39 @@
 		  	});
 		  }
 
+		  function login() {
+		  	FB.login(function(response) {
+		  		checkLoginState();
+		  	});
+		  }
+
 		  // Here we run a very simple test of the Graph API after login is
 		  // successful.  See statusChangeCallback() for when this call is made.
 		  function testAPI() {
 		    console.log('Welcome!  Fetching your information.... ');
 
 		    FB.api('/me?fields=id,name,picture', function(response) {
-		    	var innerHTML = '';
-		    	innerHTML += '<img src="'+ response.picture.data.url +'" onclick="logout();"/>';
+		    	var innerHTML = response.name +'\'s Likes';
+		    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="'+ response.picture.data.url +'" onclick="logout()"/>';
 		    	document.getElementById('navigationBar').innerHTML = innerHTML;
 		    });
 
-		    FB.api('/me/likes?fields=id,name,picture,created_time,link,category', function(response) {
-		      //<img src="img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
+		    FB.api('/me/likes?fields=id,name,created_time,link,category', function(response) {
+		    console.log(response);	
+		    var likes = response.data;
+		    if (likes.length) {
+    			var like = likes[0];
+    			loadProductsForLike(like);
+    		}
 		    var innerHTML = '';
-		    for (var i = 0; i < response.data.length; i++) {
-		    	var like = response.data[i];
-		    	// innerHTML += '<img src="'+ like.picture.data.url +'"/>';
-		    	innerHTML += '<img id="'+i+'" src="'+ like.picture.data.url +'"></img>';;
+		    for (var i = 0; i < likes.length; i++) {
+		    	var like = likes[i];
+		    	// https://graph.facebook.com/user_id/picture?type=large;
+		    	innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
 		    }
 		    document.getElementById('content').innerHTML = innerHTML;
+		    finalCount = likes.length;
+			window.onload();
 		    });
 		  }
 
@@ -149,6 +162,11 @@
 
 
 		   function loadJSON() {   
+		   		//<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
+		   		var innerHTML = 'ShopLikes';
+		    	innerHTML += '<img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
+		    	document.getElementById('navigationBar').innerHTML = innerHTML;
+
 	    		var xobj = new XMLHttpRequest();
 	        	xobj.overrideMimeType("application/json");
 				xobj.open('GET', "{{url_for('static',filename='res/random_likes.json')}}", true); // Replace 'my_data' with the path to your file
@@ -188,7 +206,7 @@
 	<body>
 		<div id="main_content">
 			<div id="navigationBar">ShopLikes
-				<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="FB.login();"/>
+				<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
 			</div>	
 			<div class="pure-g cover" id="content">
 	      		<img id="0" src="{{url_for('static', filename='images/winter.jpg')}}">
