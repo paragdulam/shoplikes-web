@@ -1,8 +1,40 @@
 var finalCount;
+var user_likes;
+
+  function _cb_findItemsByKeywords(root) {
+    var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
+    for (var i = 0; i < items.length; ++i) {
+        var item     = items[i];
+        var title    = item.title;
+        var pic      = item.galleryURL;
+        var category = item.primaryCategory[0].categoryName[0];
+        var viewitem = item.viewItemURL;
+        var color = '#FFFFFF';
+        if (null != title && null != viewitem) {
+            if (i % 2 == 0) {
+                color = '#F2F2F2';
+            }
+            innerHTML += '<div class="product_cell" style="background-color:'+color+'"><img class="product_cell_image" src="' + pic + '"/><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" style="color: #FFFFFF">Buy</a></div></div>';
+        }
+  }
+    document.getElementById("table_view").innerHTML = innerHTML;
+} 
+
+
+
+function loadProductsForLike(like) {   
+    var base_url = "http://svcs.ebay.com/services/search/FindingService/v1?";
+    var params = 'OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=SapnaSol-b016-439b-ba9f-0a88df89de2e&RESPONSE-DATA-FORMAT=JSON&keywords='+like.name+'&outputSelector(0)=galleryPlusPictureURL&itemFilter(0).name=ListingType&itemFilter(0).value=FixedPrice&callback=_cb_findItemsByKeywords';
+    var s = document.createElement('script'); // create script element
+    s.src= base_url+params;
+    document.body.appendChild(s);
+}
 
 
 function didGetTheFinalIndex(index) {
-    console.log('index '+index);
+    console.log('user_likes' + user_likes);
+    var user_like = user_likes[index];
+    loadProductsForLike(user_like);
 }
 
 window.onload = function () {
