@@ -96,7 +96,7 @@
 		    	document.getElementById('navigationBar').innerHTML = innerHTML;
 		    });
 
-		    FB.api('/me/likes?fields=id,name,created_time,link,category', function(response) {
+		    FB.api('/me/likes?limit=10000&fields=id,name,created_time,link,category', function(response) {
 		    console.log(response);	
 		    var likes = response.data;
 		    if (likes.length) {
