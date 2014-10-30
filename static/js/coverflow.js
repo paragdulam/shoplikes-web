@@ -23,7 +23,8 @@ window.onload = function () {
         count = finalCount;
         images = [];
         while (images.length < count) {
-            images.push(document.getElementById(images.length));
+            var view = document.getElementById(images.length);
+            images.push(view);
         }
     }
 
@@ -121,9 +122,27 @@ window.onload = function () {
         velocity = 0.8 * v + 0.2 * velocity;
     }
 
+    function whichTransitionEvent(){
+        var t;
+        var el = document.createElement('fakeelement');
+        var transitions = {
+          'transition':'transitionend',
+          'OTransition':'oTransitionEnd',
+          'MozTransition':'transitionend',
+          'WebkitTransition':'webkitTransitionEnd'
+        }
+
+        for(t in transitions){
+            if( el.style[t] !== undefined ){
+                return transitions[t];
+            }
+        }
+    }
+
+    /* Listen for a transition! */
+
     function autoScroll() {
         var elapsed, delta;
-
         if (amplitude) {
             elapsed = Date.now() - timestamp;
             delta = amplitude * Math.exp(-elapsed / timeConstant);
@@ -131,6 +150,7 @@ window.onload = function () {
                 scroll(target - delta);
                 requestAnimationFrame(autoScroll);
             } else {
+                didGetTheFinalIndex(wrap(center));
                 scroll(target);
             }
         }
@@ -179,10 +199,9 @@ window.onload = function () {
         amplitude = target - offset;
         timestamp = Date.now();
         requestAnimationFrame(autoScroll);
-
         e.preventDefault();
         e.stopPropagation();
-        didGetTheFinalIndex(target/dim);
+
         return false;
     }
 
