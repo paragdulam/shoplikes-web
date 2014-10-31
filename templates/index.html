@@ -1,0 +1,210 @@
+<doctype html>
+<html class="no-js">
+	<head>
+	    <title>ShopLikes</title>
+	    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no maximum-scale=1">
+		<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='css/pure-nr-min.css')}}">
+		<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='css/style.css')}}">
+
+		<script type="text/javascript" src="{{url_for('static', filename='js/coverflow.js')}}"></script>
+	<script>
+		  // This is called with the results from from FB.getLoginStatus().
+		  function statusChangeCallback(response) {
+		    console.log('statusChangeCallback');
+		    // The response object is returned with a status field that lets the
+		    // app know the current login status of the person.
+		    // Full docs on the response object can be found in the documentation
+		    // for FB.getLoginStatus().
+		    if (response.status === 'connected') {
+		      // Logged into your app and Facebook.
+		      testAPI();
+		    } else {
+		      // The person is not logged into Facebook, so we're not sure if
+		      // they are logged into this app or not.
+		      showInitialScreen();
+		    }
+		  }
+
+		  // This function is called when someone finishes with the Login
+		  // Button.  See the onlogin handler attached to it in the sample
+		  // code below.
+		  function checkLoginState() {
+		    FB.getLoginStatus(function(response) {
+		      statusChangeCallback(response);
+		    });
+		  }
+
+		  window.fbAsyncInit = function() {
+		  FB.init({
+		    appId      : '1485658648363694',
+		    cookie     : true,  // enable cookies to allow the server to access 
+		                        // the session
+		    xfbml      : true,  // parse social plugins on this page
+		    version    : 'v2.1' // use version 2.1
+		  });
+
+		  // Now that we've initialized the JavaScript SDK, we call 
+		  // FB.getLoginStatus().  This function gets the state of the
+		  // person visiting this page and can return one of three states to
+		  // the callback you provide.  They can be:
+		  //
+		  // 1. Logged into your app ('connected')
+		  // 2. Logged into Facebook, but not your app ('not_authorized')
+		  // 3. Not logged into Facebook and can't tell if they are logged into
+		  //    your app or not.
+		  //
+		  // These three cases are handled in the callback function.
+
+		  FB.getLoginStatus(function(response) {
+		    statusChangeCallback(response);
+		  });
+
+		  };
+
+		  // Load the SDK asynchronously
+		  (function(d, s, id) {
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) return;
+		    js = d.createElement(s); js.id = id;
+		    js.src = "//connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		  }(document, 'script', 'facebook-jssdk'));
+
+
+		  //logout function
+		  function logout() {
+		  	FB.logout(function(response) {
+		  		checkLoginState();
+		  	});
+		  }
+
+		  function login() {
+		  	FB.login(function(response) {
+		  		checkLoginState();
+		  	});
+		  }
+
+		  // Here we run a very simple test of the Graph API after login is
+		  // successful.  See statusChangeCallback() for when this call is made.
+		  function testAPI() {
+		    console.log('Welcome!  Fetching your information.... ');
+
+		    FB.api('/me?fields=id,name,picture', function(response) {
+		    	var innerHTML = response.name +'\'s Likes';
+		    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="'+ response.picture.data.url +'" onclick="logout()"/>';
+		    	document.getElementById('navigationBar').innerHTML = innerHTML;
+		    });
+
+		    FB.api('/me/likes?fields=id,name,created_time,link,category', function(response) {
+		    console.log(response);	
+		    var likes = response.data;
+		    user_likes = likes;
+		    if (likes.length) {
+    			var like = likes[0];
+    			loadProductsForLike(like);
+    		}
+		    var innerHTML = '';
+		    for (var i = 0; i < likes.length; i++) {
+		    	var like = likes[i];
+		    	// https://graph.facebook.com/user_id/picture?type=large;
+		    	innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
+		    }
+		    document.getElementById('content').innerHTML = innerHTML;
+		    finalCount = likes.length;
+			window.onload();
+		    });
+		  }
+
+
+		//   function _cb_findItemsByKeywords(root) {
+		//   	console.log('root');
+		//   	console.log(root);
+		//   	var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
+		//   	var innerHTML = '';
+  // 			for (var i = 0; i < items.length; ++i) {
+  //   			var item     = items[i];
+  //   			var title    = item.title;
+  //   			var pic      = item.galleryURL;
+  //   			var category = item.primaryCategory[0].categoryName[0];
+  //   			var viewitem = item.viewItemURL;
+  //   			var color = '#FFFFFF';
+  //   			if (null != title && null != viewitem) {
+  //   				if (i % 2 == 0) {
+  //   					color = '#F2F2F2';
+  //   				}
+  //     				innerHTML += '<div class="product_cell" style="background-color:'+color+'"><img class="product_cell_image" src="' + pic + '"/><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" style="color: #FFFFFF">Buy</a></div></div>';
+  //   			}
+		//   }
+  // 			document.getElementById("table_view").innerHTML = innerHTML;
+		// } 
+
+		  //Read External JSON File
+
+		   function loadJSON() {   
+		   		//<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
+		   		var innerHTML = 'ShopLikes';
+		    	innerHTML += '<img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
+		    	document.getElementById('navigationBar').innerHTML = innerHTML;
+
+	    		var xobj = new XMLHttpRequest();
+	        	xobj.overrideMimeType("application/json");
+				xobj.open('GET', "{{url_for('static',filename='res/random_likes.json')}}", true); // Replace 'my_data' with the path to your file
+				xobj.onreadystatechange = function () {
+	          	if (xobj.readyState == 4 && xobj.status == "200") {
+	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+    				  	var random_likes = JSON.parse(xobj.responseText); 
+    				  	user_likes = random_likes;
+    				  	if (random_likes.length) {
+    				  		var like = random_likes[0];
+    				  		loadProductsForLike(like);
+    				  	};
+					  	var innerHTML = '';
+					    for (var i = 0; i < random_likes.length; i++) {
+					    	var like = random_likes[i];
+					    	//https://graph.facebook.com/user_id/picture?type=large
+					    	innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
+					    	// var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
+					    	// innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
+					    }
+					    document.getElementById('content').innerHTML = innerHTML;
+					    finalCount = random_likes.length;
+					    window.onload();
+	          		}
+	    		};
+
+	    		xobj.send(null);  
+ 			}
+
+
+		  //Show Initial Screen
+		  function showInitialScreen() {
+		  	loadJSON();
+		  }
+
+		</script>
+	</head>
+
+	<body>
+		<div id="main_content">
+			<div id="navigationBar">ShopLikes
+				<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
+			</div>	
+			<div class="pure-g cover" id="content">
+	      		<img id="0" src="{{url_for('static', filename='images/winter.jpg')}}">
+	      		<img id="1" src="{{url_for('static', filename='images/14.jpg')}}">
+	      		<img id="2" src="{{url_for('static', filename='images/cloudatlas.jpg')}}">
+	      		<img id="3" src="{{url_for('static', filename='images/dancewithdragons.jpg')}}">
+	      		<img id="4" src="{{url_for('static', filename='images/fiftyshades.jpg')}}">
+	      		<img id="5" src="{{url_for('static', filename='images/greatgatsby.jpg')}}">
+	      		<img id="6" src="{{url_for('static', filename='images/inferno.jpg')}}">
+	      		<img id="7" src="{{url_for('static', filename='images/koban.jpg')}}">
+	      		<img id="8" src="{{url_for('static', filename='images/renegade.jpg')}}">
+	  		</div>
+	  		<div id="table_view">
+	  			<img id="loading" src="{{url_for('static', filename='img/loading.gif')}}"/>
+	  		</div>
+		</div>
+
+	</body>
+</html>
