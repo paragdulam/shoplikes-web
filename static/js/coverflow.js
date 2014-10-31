@@ -3,6 +3,7 @@ var user_likes;
 
   function _cb_findItemsByKeywords(root) {
     var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
+    var innerHTML = '';
     for (var i = 0; i < items.length; ++i) {
         var item     = items[i];
         var title    = item.title;
@@ -22,7 +23,10 @@ var user_likes;
 
 
 
-function loadProductsForLike(like) {   
+function loadProductsForLike(like) { 
+    var innerHTML = '<img id="loading" src="static/img/loading.gif"/>';
+    document.getElementById("table_view").innerHTML = innerHTML;
+
     var base_url = "http://svcs.ebay.com/services/search/FindingService/v1?";
     var params = 'OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=SapnaSol-b016-439b-ba9f-0a88df89de2e&RESPONSE-DATA-FORMAT=JSON&keywords='+like.name+'&outputSelector(0)=galleryPlusPictureURL&itemFilter(0).name=ListingType&itemFilter(0).value=FixedPrice&callback=_cb_findItemsByKeywords';
     var s = document.createElement('script'); // create script element
@@ -32,7 +36,6 @@ function loadProductsForLike(like) {
 
 
 function didGetTheFinalIndex(index) {
-    console.log('user_likes' + user_likes);
     var user_like = user_likes[index];
     loadProductsForLike(user_like);
 }
