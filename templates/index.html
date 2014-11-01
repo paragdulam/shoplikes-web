@@ -163,7 +163,7 @@
 					    for (var i = 0; i < random_likes.length; i++) {
 					    	var like = random_likes[i];
 					    	//https://graph.facebook.com/user_id/picture?type=large
-					    	innerHTML += '<div><img style="display:inline;" id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
+					    	innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
 					    	// var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
 					    	// innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
 					    }
@@ -208,6 +208,5 @@
 	  			Parag Dulam Inc.
 	  		</div>
 		</div>
-
 	</body>
 </html>

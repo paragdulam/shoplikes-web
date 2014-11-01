@@ -59,7 +59,7 @@ aside {
     text-decoration: none;
     display: block;
     font-family: Helvetica, Sans-Serif; 
-  font-size: 12pt;
+    font-size: 12pt;
 }
 
 .subtitle_text {
@@ -103,7 +103,6 @@ aside {
     bottom: 40px;
     min-width: 320px;
 }
-
 
 
 #facebook {
