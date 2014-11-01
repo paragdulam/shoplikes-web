@@ -35,7 +35,7 @@ aside {
     top: 5px;
     position: absolute;
     font-family: Helvetica, Sans-Serif;
-    font-size: 14pt;
+    font-size: 12pt;
     color: #000000;
 }
 
@@ -58,13 +58,15 @@ aside {
     margin-top: 6px;
     text-decoration: none;
     display: block;
+    font-family: Helvetica, Sans-Serif; 
+  font-size: 12pt;
 }
 
 .subtitle_text {
     float: left;
     font-family: Helvetica, Sans-Serif;
     font-style: italic;
-    font-size: 12pt;
+    font-size: 10pt;
     color: #808080;
     position: absolute;
     left: 100px;
@@ -99,7 +101,10 @@ aside {
     right: 0;
     top:320px;
     bottom: 40px;
+    min-width: 320px;
 }
+
+
 
 #facebook {
     width: 30px;
@@ -139,6 +144,7 @@ aside {
     height: 280px;
     position: absolute;
     background: #000000;
+    color: #FFFFFF;
 }
 
 #view table {

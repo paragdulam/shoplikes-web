@@ -1,5 +1,5 @@
-<doctype html>
-<html class="no-js">
+<!doctype html>
+<html>
 	<head>
 	    <title>ShopLikes</title>
 	    <meta charset="utf-8">
@@ -163,7 +163,7 @@
 					    for (var i = 0; i < random_likes.length; i++) {
 					    	var like = random_likes[i];
 					    	//https://graph.facebook.com/user_id/picture?type=large
-					    	innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
+					    	innerHTML += '<div><img style="display:inline;" id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
 					    	// var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
 					    	// innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
 					    }
@@ -203,6 +203,9 @@
 	  		</div>
 	  		<div id="table_view">
 	  			<img id="loading" src="{{url_for('static', filename='img/loading.gif')}}"/>
+	  		</div>
+	  		<div id="navigationBar" style="bottom:0;position:absolute;">
+	  			Parag Dulam Inc.
 	  		</div>
 		</div>
 
