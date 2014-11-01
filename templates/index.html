@@ -82,7 +82,7 @@
 		  function login() {
 		  	FB.login(function(response) {
 		  		checkLoginState();
-		  	}{'scope': 'email,user_likes,user_about_me'});
+		  	},{'scope': 'email,user_likes,user_about_me'});
 		  }
 
 		  // Here we run a very simple test of the Graph API after login is
