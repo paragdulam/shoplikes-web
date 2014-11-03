@@ -1,7 +1,9 @@
 var finalCount;
 var user_likes;
+var currequest;
 
   function _cb_findItemsByKeywords(root) {
+    console.log(root);
     var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     var innerHTML = '';
     for (var i = 0; i < items.length; ++i) {
@@ -19,6 +21,7 @@ var user_likes;
         }
   }
     document.getElementById("table_view").innerHTML = innerHTML;
+
 } 
 
 
@@ -32,6 +35,7 @@ function loadProductsForLike(like) {
     var s = document.createElement('script'); // create script element
     s.src= base_url+params;
     document.body.appendChild(s);
+    currequest = like;
 }
 
 
