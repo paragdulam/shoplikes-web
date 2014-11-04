@@ -1,5 +1,7 @@
 var finalCount;
 var user_likes;
+var searching = 'Searching Products for "';
+var dots = '"...';
 
 
   function _cb_findItemsByKeywords(root) {
@@ -25,12 +27,15 @@ var user_likes;
         innerHTML += '<div class="product_cell" style="background-color:#F2F2F2"><img class="product_cell_image" src="static/img/not_found.png"/><div class="title_text" style="line-height:90px">No Products found for the selected Like.</div></div>';
     }
     document.getElementById("table_view").innerHTML = innerHTML;
+    var innHTML = document.getElementById("table_header").innerHTML;
+    var likeName = innHTML.substring(searching.length,innHTML.length - dots.length);
+    document.getElementById("table_header").innerHTML = likeName + '('+items.length+')';
 } 
 
 
 
 function loadProductsForLike(like) { 
-    document.getElementById("table_header").innerHTML = like.name;
+    document.getElementById("table_header").innerHTML = searching+like.name+dots;
     var innerHTML = '<img id="loading" src="static/img/loading.gif"/>';
     document.getElementById("table_view").innerHTML = innerHTML;
     var base_url = "http://svcs.ebay.com/services/search/FindingService/v1?";
