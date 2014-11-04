@@ -115,7 +115,7 @@
     			var like = likes[0];
     			loadProductsForLike(like);
     		}
-		    var innerHTML = '';
+		    var innerHTML = like.name;
 		    for (var i = 0; i < likes.length; i++) {
 		    	var like = likes[i];
 		    	// https://graph.facebook.com/user_id/picture?type=large;
@@ -147,7 +147,7 @@
     				  		var like = random_likes[0];
     				  		loadProductsForLike(like);
     				  	};
-					  	var innerHTML = '';
+					  	var innerHTML = like.name;
 					    for (var i = 0; i < random_likes.length; i++) {
 					    	var like = random_likes[i];
 					    	//https://graph.facebook.com/user_id/picture?type=large
@@ -163,8 +163,6 @@
 
 	    		xobj.send(null);  
  			}
-
-
 		  //Show Initial Screen
 		  function showInitialScreen() {
 		  	loadJSON();
@@ -189,6 +187,7 @@
 	      		<img id="7" src="{{url_for('static', filename='images/koban.jpg')}}">
 	      		<img id="8" src="{{url_for('static', filename='images/renegade.jpg')}}">
 	  		</div>
+	  		<div id="table_header">Loading Likes...</div>
 	  		<div id="table_view">
 	  			<img id="loading" src="{{url_for('static', filename='img/loading.gif')}}"/>
 	  		</div>

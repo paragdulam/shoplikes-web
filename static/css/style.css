@@ -91,17 +91,44 @@ aside {
 }
 
 
+
+#table_header {
+  position: absolute;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 290px;
+  min-width: 30px;
+  text-align: center;
+
+  height: 30px;
+  color: #FFFFFF;
+  line-height: 30px;
+
+  background: #1664E1; /* Old browsers */
+  background: -moz-linear-gradient(top, #1664E1 0%, #1667E7 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1664E1), color-stop(100%,#1667E7)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #1664E1 0%,#1667E7 100%); /* Chrome10+,Safari5.1+ */ 
+  background: -o-linear-gradient(top, #1664E1 0%,#1667E7 100%); /* Opera 11.10+ */
+  background: linear-gradient(to bottom, #1664E1 0%,#1667E7 100%); /* W3C standard, IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1664E1', endColorstr='#1667E7',GradientType=0 ); /* IE6-9 */
+
+}
+
+
 #table_view {
-    width: 50%;
-    overflow: auto; 
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    bottom: 6%;
-    top: 320px;
-    min-width: 320px;
+  width: 50%;
+  overflow: auto; 
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: 6%;
+  top: 320px;
+  min-width: 320px;
 }
 
 
@@ -140,10 +167,13 @@ aside {
 #content {
     overflow: hidden;
     width: 100%;
-    height: 280px;
+    height: 250px;
     position: absolute;
     background: #000000;
     color: #FFFFFF;
+    line-height: 530px;
+    text-align: center;
+    word-break:break-all;
 }
 
 #view table {

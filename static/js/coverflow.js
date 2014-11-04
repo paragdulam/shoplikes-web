@@ -1,6 +1,6 @@
 var finalCount;
 var user_likes;
-var currlike;
+
 
   function _cb_findItemsByKeywords(root) {
     console.log(root);
@@ -25,21 +25,19 @@ var currlike;
         innerHTML += '<div class="product_cell" style="background-color:#F2F2F2"><img class="product_cell_image" src="static/img/not_found.png"/><div class="title_text" style="line-height:90px">No Products found for the selected Like.</div></div>';
     }
     document.getElementById("table_view").innerHTML = innerHTML;
-
 } 
 
 
 
 function loadProductsForLike(like) { 
+    document.getElementById("table_header").innerHTML = like.name;
     var innerHTML = '<img id="loading" src="static/img/loading.gif"/>';
     document.getElementById("table_view").innerHTML = innerHTML;
-
     var base_url = "http://svcs.ebay.com/services/search/FindingService/v1?";
     var params = 'OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=SapnaSol-b016-439b-ba9f-0a88df89de2e&RESPONSE-DATA-FORMAT=JSON&keywords='+like.name+'&outputSelector(0)=galleryPlusPictureURL&itemFilter(0).name=ListingType&itemFilter(0).value=FixedPrice&callback=_cb_findItemsByKeywords';
     var s = document.createElement('script'); // create script element
     s.src= base_url+params;
     document.body.appendChild(s);
-    currlike = like;
 }
 
 
