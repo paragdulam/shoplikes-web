@@ -1,25 +1,29 @@
 var finalCount;
 var user_likes;
-var currequest;
+var currlike;
 
   function _cb_findItemsByKeywords(root) {
     console.log(root);
     var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     var innerHTML = '';
-    for (var i = 0; i < items.length; ++i) {
-        var item     = items[i];
-        var title    = item.title;
-        var pic      = item.galleryURL;
-        var category = item.primaryCategory[0].categoryName[0];
-        var viewitem = item.viewItemURL;
-        var color = '#FFFFFF';
-        if (null != title && null != viewitem) {
-            if (i % 2 == 0) {
-                color = '#F2F2F2';
+    if (items.length) {
+        for (var i = 0; i < items.length; ++i) {
+            var item     = items[i];
+            var title    = item.title;
+            var pic      = item.galleryURL;
+            var category = item.primaryCategory[0].categoryName[0];
+            var viewitem = item.viewItemURL;
+            var color = '#FFFFFF';
+            if (null != title && null != viewitem) {
+                if (i % 2 == 0) {
+                    color = '#F2F2F2';
+                }
+                innerHTML += '<div class="product_cell" style="background-color:'+color+'"><img class="product_cell_image" src="' + pic + '"/><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" style="color: #FFFFFF">Buy</a></div></div>';
             }
-            innerHTML += '<div class="product_cell" style="background-color:'+color+'"><img class="product_cell_image" src="' + pic + '"/><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" style="color: #FFFFFF">Buy</a></div></div>';
         }
-  }
+    } else {
+        innerHTML += '<div class="product_cell" style="background-color:#F2F2F2"><img class="product_cell_image" src="static/img/not_found.png"/><div class="title_text" style="line-height:90px">No Products found for the selected Like.</div></div>';
+    }
     document.getElementById("table_view").innerHTML = innerHTML;
 
 } 
@@ -35,7 +39,7 @@ function loadProductsForLike(like) {
     var s = document.createElement('script'); // create script element
     s.src= base_url+params;
     document.body.appendChild(s);
-    currequest = like;
+    currlike = like;
 }
 
 
