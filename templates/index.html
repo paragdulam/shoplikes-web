@@ -47,8 +47,8 @@
 
 		  window.fbAsyncInit = function() {
 		  FB.init({
-		    //appId      : '1427414634188096',
-		    appId      : '1485658648363694',
+		    appId      : '1427414634188096',
+		    //appId      : '1485658648363694',
 		    cookie     : true,  // enable cookies to allow the server to access 
 		                        // the session
 		    xfbml      : true,  // parse social plugins on this page
@@ -93,7 +93,7 @@
 		  function login() {
 		  	FB.login(function(response) {
 		  		checkLoginState();
-		  	},{'scope': 'email,user_likes,user_about_me'});
+		  	},{'scope': 'email,user_likes,user_about_me,user_friends'});
 		  }
 
 		  // Here we run a very simple test of the Graph API after login is
@@ -105,8 +105,27 @@
 		    	var innerHTML = response.name +'\'s Likes';
 		    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="'+ response.picture.data.url +'" onclick="logout()"/>';
 		    	document.getElementById('navigationBar').innerHTML = innerHTML;
+		    	var myId = response.id;
+
+		    	FB.api(
+    			"/me/friends",
+    				function (response) {
+				      if (response && !response.error) {
+       					 /* handle the result */
+       					 			var friends = response.data;
+       					 		    var innerHTML = '<img class="friend_cell" src="https://graph.facebook.com/'+ myId +'/picture?type=large"></img>';
+								    for (var i = 0; i < friends.length; i++) {
+								    	var friend = friends[i];
+								    	// https://graph.facebook.com/user_id/picture?type=large;
+								    	innerHTML += '<img class="friend_cell" src="https://graph.facebook.com/'+ friend.id +'/picture?type=large"></img>';
+								    }
+								    document.getElementById('friends_table_view').innerHTML = innerHTML;
+      					}
+    				}
+				);
 		    });
 
+		    
 		    FB.api('/me/likes?fields=id,name,created_time,link,category', function(response) {
 		    console.log(response);	
 		    var likes = response.data;
@@ -190,6 +209,9 @@
 	  		<div id="table_header">Loading Likes...</div>
 	  		<div id="table_view">
 	  			<img id="loading" src="{{url_for('static', filename='img/loading.gif')}}"/>
+	  		</div>
+	  		<div id="friends_table_view">
+	  			<div class="friend_cell"><img src="{{url_for('static', filename='img/not_found.png')}}"/></div>
 	  		</div>
 	  		<div id="navigationBar" style="bottom:0;position:absolute;">
 	  			Parag Dulam Inc.
