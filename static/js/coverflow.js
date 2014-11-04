@@ -3,8 +3,7 @@ var user_likes;
 var searching = 'Searching Products for "';
 var dots = '"...';
 
-
-  function _cb_findItemsByKeywords(root) {
+ function _cb_findItemsByKeywords(root) {
     var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     var innerHTML = '';
     if (items.length) {
@@ -25,12 +24,11 @@ var dots = '"...';
     } else {
         innerHTML += '<div class="product_cell" style="background-color:#F2F2F2"><img class="product_cell_image" src="static/img/not_found.png"/><div class="title_text" style="line-height:90px">No Products found for the selected Like.</div></div>';
     }
-    document.getElementById("table_view").innerHTML = innerHTML;
     var innHTML = document.getElementById("table_header").innerHTML;
     var likeName = innHTML.substring(searching.length,innHTML.length - dots.length);
+    document.getElementById("table_view").innerHTML = innerHTML;
     document.getElementById("table_header").innerHTML = likeName + '('+items.length+')';
 } 
-
 
 
 function loadProductsForLike(like) { 
@@ -46,8 +44,7 @@ function loadProductsForLike(like) {
 
 
 function didGetTheFinalIndex(index) {
-    var user_like = user_likes[index];
-    loadProductsForLike(user_like);
+    loadProductsForLike(user_likes[index]);
 }
 
 window.onload = function () {
@@ -195,8 +192,8 @@ window.onload = function () {
                 scroll(target - delta);
                 requestAnimationFrame(autoScroll);
             } else {
-                didGetTheFinalIndex(wrap(center));
                 scroll(target);
+                didGetTheFinalIndex(wrap(center));
             }
         }
     }
