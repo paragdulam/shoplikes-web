@@ -5,7 +5,6 @@ var dots = '"...';
 
 
   function _cb_findItemsByKeywords(root) {
-    console.log(root);
     var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     var innerHTML = '';
     if (items.length) {
