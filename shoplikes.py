@@ -20,7 +20,8 @@ def getProductsforLike():
 	likeName = params['likeName']
 	requestURL = 'http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=SapnaSol-b016-439b-ba9f-0a88df89de2e&RESPONSE-DATA-FORMAT=JSON&keywords='+likeName+'&outputSelector(0)=galleryPlusPictureURL&itemFilter(0).name=ListingType&itemFilter(0).value=FixedPrice'
 	response = requests.get(requestURL).content
-	retval = {'likeId':likeId, 'likeName':likeName, 'results':response}
+	retval = {'likeId':likeId, 'likeName':likeName}
+	#, 'results':response
 	return jsonify(retval)
 
 
