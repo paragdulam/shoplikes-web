@@ -101,7 +101,6 @@
 
 	  		var innerHTML = 'My Likes';
 	    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  response.authResponse.userID +'/picture?type=small" onclick="logout()"/>';
-	    	console.log(response);
 	    	document.getElementById('navigationBar').innerHTML = innerHTML;
 
 		    FB.api('/me/likes?fields=id,name,created_time,link,category', function(response) {
