@@ -33,6 +33,9 @@ var dots = '"...';
 } 
 
 
+
+
+
 function loadProductsForLike(like) { 
     document.getElementById("table_header").innerHTML = searching+like.name+dots;
     var innerHTML = '<img id="loading" src="static/img/loading.gif"/>';
