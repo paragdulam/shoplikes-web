@@ -46,8 +46,8 @@
 
 		  window.fbAsyncInit = function() {
 		  FB.init({
-		    //appId      : '1427414634188096',
-		    appId      : '1485658648363694',
+		    appId      : '1427414634188096',
+		    //appId      : '1485658648363694',
 		    cookie     : true,  // enable cookies to allow the server to access 
 		                        // the session
 		    xfbml      : true,  // parse social plugins on this page
@@ -98,7 +98,6 @@
 		  // Here we run a very simple test of the Graph API after login is
 		  // successful.  See statusChangeCallback() for when this call is made.
 		  function testAPI(response) {
-
 	  		var innerHTML = 'My Likes';
 	    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  response.authResponse.userID +'/picture?type=small" onclick="logout()"/>';
 	    	document.getElementById('navigationBar').innerHTML = innerHTML;
