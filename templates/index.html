@@ -46,8 +46,8 @@
 
 		  window.fbAsyncInit = function() {
 		  FB.init({
-		    appId      : '1427414634188096',
-		    //appId      : '1485658648363694',
+		    //appId      : '1427414634188096',
+		    appId      : '1485658648363694',
 		    cookie     : true,  // enable cookies to allow the server to access 
 		                        // the session
 		    xfbml      : true,  // parse social plugins on this page
@@ -105,19 +105,7 @@
 
 		    FB.api('/me/likes?fields=id,name,created_time,link,category', function(response) {
 			    var likes = response.data;
-			    user_likes = likes;
-			    if (likes.length) {
-	    			var like = likes[0];
-	    			loadProductsForLike(like);
-	    		}
-			    var innerHTML = like.name;
-			    for (var i = 0; i < likes.length; i++) {
-			    	var like = likes[i];
-			    	innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
-			    }
-			    document.getElementById('content').innerHTML = innerHTML;
-			    finalCount = likes.length;
-				window.onload();
+			    populateCoverflow(random_likes);
 		    });
 		  }
 
@@ -136,25 +124,9 @@
 	          	if (xobj.readyState == 4 && xobj.status == "200") {
 	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
     				  	var random_likes = JSON.parse(xobj.responseText); 
-    				  	user_likes = random_likes;
-    				  	if (random_likes.length) {
-    				  		var like = random_likes[0];
-    				  		loadProductsForLike(like);
-    				  	};
-					  	var innerHTML = like.name;
-					    for (var i = 0; i < random_likes.length; i++) {
-					    	var like = random_likes[i];
-					    	//https://graph.facebook.com/user_id/picture?type=large
-					    	innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
-					    	// var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
-					    	// innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
-					    }
-					    document.getElementById('content').innerHTML = innerHTML;
-					    finalCount = random_likes.length;
-					    window.onload();
+    				  	populateCoverflow(random_likes);
 	          		}
 	    		};
-
 	    		xobj.send(null);  
  			}
 		  //Show Initial Screen

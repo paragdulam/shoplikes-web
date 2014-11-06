@@ -27,13 +27,31 @@ var dots = '"...';
         innerHTML += '<div class="product_cell" style="background-color:#F2F2F2"><img class="product_cell_image" src="static/img/not_found.png"/><div class="title_text" style="line-height:90px">No Products found for the selected Like.</div></div>';
     }
     var innHTML = document.getElementById("table_header").innerHTML;
-    var likeName = innHTML.substring(searching.length,innHTML.length - dots.length);
-    document.getElementById("table_view").innerHTML = innerHTML;
-    document.getElementById("table_header").innerHTML = likeName + '('+items.length+')';
+    //var likeName = innHTML.substring(searching.length,innHTML.length - dots.length);
+    var currLike = user_likes[currentIndex];
+    if (currLike.id == root.likeId) {
+        document.getElementById("table_view").innerHTML = innerHTML;
+        document.getElementById("table_header").innerHTML = root.likeName + '('+items.length+')';
+    }
 } 
 
 
-
+  function populateCoverflow(likes){
+        user_likes = likes;
+        var like = likes[0];
+        didGetTheFinalIndex(0);
+        var innerHTML = like.name;
+        for (var i = 0; i < likes.length; i++) {
+            var like = likes[i];
+            //https://graph.facebook.com/user_id/picture?type=large
+            innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
+            // var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
+            // innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
+        }
+        document.getElementById('content').innerHTML = innerHTML;
+        finalCount = likes.length;
+        window.onload();
+    }
 
 
 function loadProductsForLike(like) { 
