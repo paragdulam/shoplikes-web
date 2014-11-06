@@ -104,7 +104,7 @@
 
 		    FB.api('/me/likes?fields=id,name,created_time,link,category', function(response) {
 			    var likes = response.data;
-			    populateCoverflow(random_likes);
+			    populateCoverflow(likes);
 		    });
 		  }
 

@@ -27,7 +27,6 @@ var dots = '"...';
         innerHTML += '<div class="product_cell" style="background-color:#F2F2F2"><img class="product_cell_image" src="static/img/not_found.png"/><div class="title_text" style="line-height:90px">No Products found for the selected Like.</div></div>';
     }
     var innHTML = document.getElementById("table_header").innerHTML;
-    //var likeName = innHTML.substring(searching.length,innHTML.length - dots.length);
     var currLike = user_likes[currentIndex];
     if (currLike.id == root.likeId) {
         document.getElementById("table_view").innerHTML = innerHTML;
