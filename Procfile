@@ -1,1 +1,1 @@
-web: python shoplikes.py
+web: gunicorn shoplikes:app
