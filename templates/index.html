@@ -27,7 +27,7 @@
 		    // for FB.getLoginStatus().
 		    if (response.status === 'connected') {
 		      // Logged into your app and Facebook.
-		      testAPI(response);
+		      getLikesForUserID(response.authResponse.userID);
 		    } else {
 		      // The person is not logged into Facebook, so we're not sure if
 		      // they are logged into this app or not.
@@ -46,8 +46,8 @@
 
 		  window.fbAsyncInit = function() {
 		  FB.init({
-		    appId      : '1427414634188096',
-		    //appId      : '1485658648363694',
+		    //appId      : '1427414634188096',
+		    appId      : '1485658648363694',
 		    cookie     : true,  // enable cookies to allow the server to access 
 		                        // the session
 		    xfbml      : true,  // parse social plugins on this page
@@ -92,17 +92,23 @@
 		  function login() {
 		  	FB.login(function(response) {
 		  		checkLoginState();
-		  	},{'scope': 'email,user_likes,public_profile'});
+		  	},{'scope': 'email,user_likes,public_profile,user_interests,user_friends'});
 		  }
 
 		  // Here we run a very simple test of the Graph API after login is
 		  // successful.  See statusChangeCallback() for when this call is made.
-		  function testAPI(response) {
+		  function getFriendsForUserID(userID) {
+		    FB.api('/'+userID+'/friends?fields=id,name,created_time,link,category', function(response) {
+		    });
+		  }
+
+
+		  function getLikesForUserID(userID) {
 	  		var innerHTML = 'My Likes';
-	    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  response.authResponse.userID +'/picture?type=small" onclick="logout()"/>';
+	    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  userID +'/picture?type=small" onclick="logout()"/>';
 	    	document.getElementById('navigationBar').innerHTML = innerHTML;
 
-		    FB.api('/me/likes?fields=id,name,created_time,link,category', function(response) {
+		    FB.api('/'+userID+'/likes?fields=id,name,created_time,link,category', function(response) {
 			    var likes = response.data;
 			    populateCoverflow(likes);
 		    });
@@ -144,6 +150,8 @@
 			<div class="pure-g cover" id="content">
 	  		</div>
 	  		<div id="table_header">Loading Likes...</div>
+	  		<div id="friends_table_header">Login to see Friends</div>
+	  		<div id="interests_table_header">Login to see Interests</div>
 	  		<div id="table_view">
 	  			<img id="loading" src="{{url_for('static', filename='img/loading.gif')}}"/>
 	  		</div>

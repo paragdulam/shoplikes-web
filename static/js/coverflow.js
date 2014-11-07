@@ -177,7 +177,6 @@ window.onload = function () {
         el.style.zIndex = 0;
         el.style.opacity = 1;
     }
-
     function track() {
         var now, elapsed, delta, v;
 
