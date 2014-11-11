@@ -29,7 +29,6 @@
 		      // Logged into your app and Facebook.
 		      getLikesForUserID(response.authResponse.userID);
 		      getFriendsForUserID(response.authResponse.userID);
-		      getInterestsForUserID(response.authResponse.userID);
 		    } else {
 		      // The person is not logged into Facebook, so we're not sure if
 		      // they are logged into this app or not.
@@ -94,14 +93,14 @@
 		  function login() {
 		  	FB.login(function(response) {
 		  		checkLoginState();
-		  	},{'scope': 'email,user_likes,public_profile,user_interests,user_friends'});
+		  	},{'scope': 'email,user_likes,public_profile,user_friends'});
 		  }
 
 		  // Here we run a very simple test of the Graph API after login is
 		  // successful.  See statusChangeCallback() for when this call is made.
 		  function getFriendsForUserID(userID) {
 		    FB.api('/'+userID+'/friends', function(response) {
-		    	console.log(response);
+		    	populateFriendsTableView(response.data);
 		    });
 		  }
 
@@ -153,17 +152,24 @@
 
 	<body>
 		<div id="main_content">
+
 			<div id="navigationBar">ShopLikes
 				<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
 			</div>	
+
 			<div class="pure-g cover" id="content">
 	  		</div>
-	  		<div id="table_header">Loading Likes...</div>
+
 	  		<div id="friends_table_header">Login to see Friends</div>
-	  		<div id="interests_table_header">Login to see Interests</div>
+
+	  		<div id="friends_table_view">
+	  		</div>
+
+	  		<div id="table_header">Loading Likes...</div>
 	  		<div id="table_view">
 	  			<img id="loading" src="{{url_for('static', filename='img/loading.gif')}}"/>
 	  		</div>
+
 	  		<div id="navigationBar" style="bottom:0;position:absolute;">
 	  			Parag Dulam Inc.
 	  		</div>

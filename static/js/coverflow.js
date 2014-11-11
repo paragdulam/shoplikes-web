@@ -34,21 +34,48 @@ var dots = '"...';
     }
 } 
 
+ function populateFriendsTableView(friends) {
+    var innerHTML = '';
+    for(var i = 0; i < friends.length ; i++) {
+        var friend = friends[i];
+        var color = '#FFFFFF';
+        if (i % 2 == 0) {
+            color = '#F2F2F2';
+        }
+        innerHTML += '<div class="friends_table_cell" style="background-color:'+color+'"><img class="friends_profile_pic" src="https://graph.facebook.com/'+ friend.id +'/picture?type=small"/><div class="friends_name_text">'+friend.name+'</div></div>';
+    }
+    document.getElementById("friends_table_view").innerHTML = innerHTML;
+
+    innHTML = 'My Friends';
+    document.getElementById("friends_table_header").innerHTML = innHTML;
+ }
+
 
   function populateCoverflow(likes){
         user_likes = likes;
-        var like = likes[0];
-        didGetTheFinalIndex(0);
-        var innerHTML = like.name;
-        for (var i = 0; i < likes.length; i++) {
-            var like = likes[i];
-            //https://graph.facebook.com/user_id/picture?type=large
-            innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
-            // var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
-            // innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
+        finalCount = 1;
+        if (user_likes.length) {
+            var like = likes[0];
+            var innerHTML = '';
+            for (var i = 0; i < likes.length; i++) {
+                var like = likes[i];
+                //https://graph.facebook.com/user_id/picture?type=large
+                innerHTML += '<img id="'+i+'" src="https://graph.facebook.com/'+ like.id +'/picture?type=large"></img>';
+                // var imagepath = "{{url_for('static',filename='images/14.jpg')}}";
+                // innerHTML += '<img id="'+i+'"src="'+imagepath+'"/>';
+            }
+            document.getElementById('content').innerHTML = innerHTML;
+            finalCount = user_likes.length;
+        } else {
+            var innerHTML = '<img id="0" src="static/img/not_found.png"></img>';
+            document.getElementById('content').innerHTML = innerHTML;
+
+            innerHTML = '<div class="product_cell" style="background-color:#F2F2F2"><img class="product_cell_image" src="static/img/not_found.png"/><div class="title_text" style="line-height:90px">No Products found for the selected Like.</div></div>';
+            document.getElementById("table_view").innerHTML = innerHTML;
+
+            innerHTML = 'You have no Likes yet.';
+            document.getElementById("table_header").innerHTML = innerHTML;
         }
-        document.getElementById('content').innerHTML = innerHTML;
-        finalCount = likes.length;
         window.onload();
     }
 
