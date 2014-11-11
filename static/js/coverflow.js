@@ -1,5 +1,6 @@
 var finalCount;
 var user_likes;
+var user_friends;
 var currentIndex;
 var searching = 'Searching Products for "';
 var dots = '"...';
@@ -34,20 +35,27 @@ var dots = '"...';
     }
 } 
 
+
  function populateFriendsTableView(friends) {
     var innerHTML = '';
-    for(var i = 0; i < friends.length ; i++) {
-        var friend = friends[i];
-        var color = '#FFFFFF';
-        if (i % 2 == 0) {
-            color = '#F2F2F2';
+    var innHTML = '';
+    user_friends = friends;
+    if (friends.length) {
+        for(var i = 0; i < user_friends.length ; i++) {
+            var friend = user_friends[i];
+            var color = '#FFFFFF';
+            if (i % 2 == 0) {
+                color = '#F2F2F2';
+            }
+            innerHTML += '<div id="'+i+'"class="friends_table_cell" onclick="selectedFriend('+i+')" style="background-color:'+color+'"><img class="friends_profile_pic" src="https://graph.facebook.com/'+ friend.id +'/picture?type=small"/><div class="friends_name_text">'+friend.name+'</div></div>';
         }
-        innerHTML += '<div class="friends_table_cell" style="background-color:'+color+'"><img class="friends_profile_pic" src="https://graph.facebook.com/'+ friend.id +'/picture?type=small"/><div class="friends_name_text">'+friend.name+'</div></div>';
+        innHTML = 'My Friends';
+        document.getElementById("friends_table_header").innerHTML = innHTML;
+    } else {
+        innHTML = 'Login to see Friends'; 
+        document.getElementById("friends_table_header").innerHTML = innHTML;
     }
     document.getElementById("friends_table_view").innerHTML = innerHTML;
-
-    innHTML = 'My Friends';
-    document.getElementById("friends_table_header").innerHTML = innHTML;
  }
 
 
@@ -56,6 +64,7 @@ var dots = '"...';
         finalCount = 1;
         if (user_likes.length) {
             var like = likes[0];
+            didGetTheFinalIndex(0);
             var innerHTML = '';
             for (var i = 0; i < likes.length; i++) {
                 var like = likes[i];

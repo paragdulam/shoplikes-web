@@ -27,8 +27,11 @@
 		    // for FB.getLoginStatus().
 		    if (response.status === 'connected') {
 		      // Logged into your app and Facebook.
-		      getLikesForUserID(response.authResponse.userID);
-		      getFriendsForUserID(response.authResponse.userID);
+		      user_friends = [];
+		      var currentUser = {"id":response.authResponse.userID,"name":"Me"};
+		      user_friends[0] = currentUser;
+		      getFriendsForUserID(currentUser);
+		      getLikesForUserID(currentUser);
 		    } else {
 		      // The person is not logged into Facebook, so we're not sure if
 		      // they are logged into this app or not.
@@ -98,25 +101,37 @@
 
 		  // Here we run a very simple test of the Graph API after login is
 		  // successful.  See statusChangeCallback() for when this call is made.
-		  function getFriendsForUserID(userID) {
-		    FB.api('/'+userID+'/friends', function(response) {
-		    	populateFriendsTableView(response.data);
+		  function getFriendsForUserID(user) {
+		    FB.api('/'+user.id+'/friends', function(response) {
+		    	user_friends = user_friends.concat(response.data);
+		    	populateFriendsTableView(user_friends);
 		    });
 		  }
 
-		  function getInterestsForUserID(userID) {
-		    FB.api('/'+userID+'/interests', function(response) {
+		  function getInterestsForUserID(user) {
+		    FB.api('/'+user.id+'/interests', function(response) {
 		    	console.log(response);
 		    });
 		  }
 
+			function selectedFriend(index)
+			{
+			    var friend = user_friends[index];
+			    getLikesForUserID(friend);
+			}
 
-		  function getLikesForUserID(userID) {
-	  		var innerHTML = 'My Likes';
-	    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  userID +'/picture?type=small" onclick="logout()"/>';
+		  function getLikesForUserID(user) {
+		  	var innerHTML = '';
+		  	var name = 'My Likes'
+		  	if (user.name != 'Me') {
+		  		innerHTML += user.name + '\'s Likes';
+		  	} else {
+		  		innerHTML += name;
+		  	}
+	    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  user_friends[0].id +'/picture?type=small" onclick="logout()"/>';
 	    	document.getElementById('navigationBar').innerHTML = innerHTML;
 
-		    FB.api('/'+userID+'/likes?fields=id,name,created_time,link,category', function(response) {
+		    FB.api('/'+user.id+'/likes?fields=id,name,created_time,link,category', function(response) {
 			    var likes = response.data;
 			    populateCoverflow(likes);
 		    });
@@ -126,6 +141,7 @@
 
 		   function loadJSON() {   
 		   		//<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
+		   		populateFriendsTableView([]); //showing No Friends 
 		   		var innerHTML = 'ShopLikes';
 		    	innerHTML += '<img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
 		    	document.getElementById('navigationBar').innerHTML = innerHTML;
