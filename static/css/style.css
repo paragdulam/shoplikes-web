@@ -219,6 +219,14 @@ aside {
 }
 
 
+#logo {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+}
+
 #facebook {
     width: 30px;
     height: 30px;

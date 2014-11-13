@@ -128,7 +128,7 @@
 		  	} else {
 		  		innerHTML += name;
 		  	}
-	    	innerHTML += '<img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  user_friends[0].id +'/picture?type=small" onclick="logout()"/>';
+	    	innerHTML += '<img id="logo" src="static/img/logo.png"/><img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  user_friends[0].id +'/picture?type=small" onclick="logout()"/>';
 	    	document.getElementById('navigationBar').innerHTML = innerHTML;
 
 		    FB.api('/'+user.id+'/likes?fields=id,name,created_time,link,category', function(response) {
@@ -140,10 +140,9 @@
 		  //Read External JSON File
 
 		   function loadJSON() {   
-		   		//<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
 		   		populateFriendsTableView([]); //showing No Friends 
 		   		var innerHTML = 'ShopLikes';
-		    	innerHTML += '<img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
+		    	innerHTML += '<img id="logo" src="static/img/logo.png"/><img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
 		    	document.getElementById('navigationBar').innerHTML = innerHTML;
 
 	    		var xobj = new XMLHttpRequest();
@@ -163,6 +162,10 @@
 		  	loadJSON();
 		  }
 
+		  function showModal() {
+		  	
+		  }
+
 		</script>
 	</head>
 
@@ -170,6 +173,7 @@
 		<div id="main_content">
 
 			<div id="navigationBar">ShopLikes
+				<img id="logo" src="{{url_for('static', filename='img/logo.png')}}" onclick="showModal()" />
 				<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
 			</div>	
 
