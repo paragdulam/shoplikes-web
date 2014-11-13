@@ -128,7 +128,7 @@
 		  	} else {
 		  		innerHTML += name;
 		  	}
-	    	innerHTML += '<img id="logo" src="static/img/logo.png"/><img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  user_friends[0].id +'/picture?type=small" onclick="logout()"/>';
+	    	innerHTML += '<a href=#openModal><img id="logo" src="static/img/logo.png"/></a><img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  user_friends[0].id +'/picture?type=small" onclick="logout()"/>';
 	    	document.getElementById('navigationBar').innerHTML = innerHTML;
 
 		    FB.api('/'+user.id+'/likes?fields=id,name,created_time,link,category', function(response) {
@@ -142,7 +142,7 @@
 		   function loadJSON() {   
 		   		populateFriendsTableView([]); //showing No Friends 
 		   		var innerHTML = 'ShopLikes';
-		    	innerHTML += '<img id="logo" src="static/img/logo.png"/><img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
+		    	innerHTML += '<a href=#openModal><img id="logo" src="static/img/logo.png"/></a><img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
 		    	document.getElementById('navigationBar').innerHTML = innerHTML;
 
 	    		var xobj = new XMLHttpRequest();
@@ -163,17 +163,23 @@
 		  }
 
 		  function showModal() {
-		  	
+
 		  }
 
 		</script>
 	</head>
 
 	<body>
+		<div id="openModal" class="modalDialog">
+		    <div><a href="#close" title="Close" class="close">X</a>
+		        <h2>Modal Box</h2>
+		        <p>This is a sample modal box that can be created using the powers of CSS3.</p>
+		        <p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users.</p>
+		    </div>
+		</div>
 		<div id="main_content">
-
 			<div id="navigationBar">ShopLikes
-				<img id="logo" src="{{url_for('static', filename='img/logo.png')}}" onclick="showModal()" />
+				<a href="#openModal"><img id="logo" src="{{url_for('static', filename='img/logo.png')}}"/></a>
 				<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
 			</div>	
 
