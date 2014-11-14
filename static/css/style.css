@@ -36,10 +36,10 @@ aside {
     margin: 10% auto;
     padding: 5px 20px 13px 20px;
     border-radius: 10px;
-    background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999);
+    background: #63AAED;
+    background: -moz-linear-gradient(#63AAED, #036FBA);
+    background: -webkit-linear-gradient(#63AAED, #036FBA);
+    background: -o-linear-gradient(#63AAED, #036FBA);
 }
 .close {
     background: #606061;
@@ -60,7 +60,7 @@ aside {
     box-shadow: 1px 1px 3px #000;
 }
 .close:hover {
-    background: #00d9ff;
+    background: #FF0000;
 }
 
 
@@ -271,6 +271,11 @@ aside {
   min-width: 320px;
 }
 
+
+#about_us_logo {
+  position: relative;
+  margin-left: 140px;
+}
 
 #logo {
     width: 30px;

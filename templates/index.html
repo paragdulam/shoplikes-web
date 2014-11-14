@@ -162,9 +162,6 @@
 		  	loadJSON();
 		  }
 
-		  function showModal() {
-
-		  }
 
 		</script>
 	</head>
@@ -172,9 +169,11 @@
 	<body>
 		<div id="openModal" class="modalDialog">
 		    <div><a href="#close" title="Close" class="close">X</a>
-		        <h2>Modal Box</h2>
-		        <p>This is a sample modal box that can be created using the powers of CSS3.</p>
-		        <p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users.</p>
+		    	<div id="about_us_logo"><img src="{{url_for('static', filename='img/about_us_logo.png')}}"/></div>
+		        <h1 style="text-align:center;color:#FFFFFF">ShopLikes</h2>
+		        <h4 style="text-align:center;color:#FFFFFF">coz what we LIKE is what we BUY...</h4>
+		        <p style="text-align:center;color:#FFFFFF">Click and Drag through the Likes or use Space Bar to go through Likes one by one.</p>
+		        <p style="text-align:center;color:#FFFFFF">Checkout what your Friends Like, may be you will find what you do.</p>
 		    </div>
 		</div>
 		<div id="main_content">
@@ -196,8 +195,8 @@
 	  			<img id="loading" src="{{url_for('static', filename='img/loading.gif')}}"/>
 	  		</div>
 
-	  		<div id="navigationBar" style="bottom:0;position:absolute;">
-	  			Parag Dulam Inc.
+	  		<div id="navigationBar" style="bottom:0;position:absolute;color:#FFFFFF">
+	  			<a href="mailto:paragdulam@gmail.com" style="text-decoration:none;display: block;font-family: Helvetica, Sans-Serif;font-size: 14pt;color:#FFFFFF">Contact Us</a>
 	  		</div>
 		</div>
 	</body>
