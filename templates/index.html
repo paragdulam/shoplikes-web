@@ -26,15 +26,27 @@
 		    // Full docs on the response object can be found in the documentation
 		    // for FB.getLoginStatus().
 		    if (response.status === 'connected') {
-		      // Logged into your app and Facebook.
-		      user_friends = [];
-		      var currentUser = {"id":response.authResponse.userID,"name":"Me"};
-		      user_friends[0] = currentUser;
+		    	user_friends = [];
+		        var currentUser = {"id":response.authResponse.userID,"name":"Me"};
+		        user_friends[0] = currentUser;
+		    	//updating profile Image.
+		    	var profImage = document.getElementById('facebook');
+		    	profImage.src = 'https://graph.facebook.com/'+  currentUser.id +'/picture?type=small';
+		    	profImage.onclick = logout;
+
+		        // Logged into your app and Facebook.
 		      getFriendsForUserID(currentUser);
 		      getLikesForUserID(currentUser);
 		    } else {
 		      // The person is not logged into Facebook, so we're not sure if
 		      // they are logged into this app or not.
+		      	var profImage = document.getElementById('facebook');
+		    	profImage.src = 'static/img/facebook.png';
+		    	profImage.onclick = login;
+
+		    	var like_title = document.getElementById('center-title');
+		    	like_title.innerHTML = 'ShopLikes';
+
 		      showInitialScreen();
 		    }
 		  }
@@ -128,9 +140,7 @@
 		  	} else {
 		  		innerHTML += name;
 		  	}
-	    	innerHTML += '<a href=#openModal><img id="logo" src="static/img/logo.png"/></a><img id="facebook" style="border:2px;border-radius:2px;border-color:#FFFFFF" src="https://graph.facebook.com/'+  user_friends[0].id +'/picture?type=small" onclick="logout()"/>';
-	    	document.getElementById('navigationBar').innerHTML = innerHTML;
-
+	    	document.getElementById('center-title').innerHTML = innerHTML;
 		    FB.api('/'+user.id+'/likes?fields=id,name,created_time,link,category', function(response) {
 			    var likes = response.data;
 			    populateCoverflow(likes);
@@ -141,9 +151,9 @@
 
 		   function loadJSON() {   
 		   		populateFriendsTableView([]); //showing No Friends 
-		   		var innerHTML = 'ShopLikes';
-		    	innerHTML += '<a href=#openModal><img id="logo" src="static/img/logo.png"/></a><img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
-		    	document.getElementById('navigationBar').innerHTML = innerHTML;
+		   		// var innerHTML = 'ShopLikes';
+		    	// innerHTML += '<a href=#openModal><img id="logo" src="static/img/logo.png"/></a><img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
+		    	// document.getElementById('navigationBar').innerHTML = innerHTML;
 
 	    		var xobj = new XMLHttpRequest();
 	        	xobj.overrideMimeType("application/json");
@@ -177,8 +187,16 @@
 		    </div>
 		</div>
 		<div id="main_content">
-			<div id="navigationBar">ShopLikes
+			<div id="navigationBar">
 				<a href="#openModal"><img id="logo" src="{{url_for('static', filename='img/logo.png')}}"/></a>
+				<div class="select-country"><a href="#">Country</a>
+					<ul>
+						<li><a href="#">Parag</a></li>
+						<li><a href="#">Parag</a></li>
+						<li><a href="#">Parag</a></li>
+					</ul>
+				</div>
+				<div id='center-title'>ShopLikes</div>
 				<img id="facebook" src="{{url_for('static', filename='img/facebook.png')}}" onclick="login()"/>
 			</div>	
 
@@ -196,7 +214,7 @@
 	  		</div>
 
 	  		<div id="navigationBar" style="bottom:0;position:absolute;color:#FFFFFF">
-	  			<a href="mailto:paragdulam@gmail.com" style="text-decoration:none;display: block;font-family: Helvetica, Sans-Serif;font-size: 14pt;color:#FFFFFF">Contact Us</a>
+	  			<a href="mailto:paragdulam@gmail.com" style="text-decoration:none;display: block;font-family: Helvetica, Sans-Serif;font-size: 14pt;color:#FFFFFF"><div>Contact Us</div></a>
 	  		</div>
 		</div>
 	</body>

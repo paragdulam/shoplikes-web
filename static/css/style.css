@@ -11,6 +11,37 @@ aside {
 
 */
 
+
+.select-country {
+  position: absolute;
+  right: 40px;
+  background: #036FBA;
+  padding-right: 5px;
+  padding-left: 5px;
+  line-height: 30px;
+  border-radius: 2px;
+  height: 30px;
+  top:5px;
+  bottom: 5px;
+  text-align: center;
+}
+
+.select-country a {
+  text-decoration: none; 
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  color: #FFFFFF;
+}
+
+.select-country ul {
+  display: none;
+}
+
+.select-country:hover ul{
+  display: block;
+}
+
+/* Modal Starts */
 .modalDialog {
     position: fixed;
     font-family: Arial, Helvetica, sans-serif;
@@ -296,7 +327,6 @@ aside {
 #navigationBar {
   font-family: Helvetica, Sans-Serif;
   font-size: 15pt;
-  text-align: center;
   vertical-align: middle;
   margin: 0;
   padding: 0;
@@ -317,12 +347,17 @@ aside {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63AAED', endColorstr='#036FBA',GradientType=0 ); /* IE6-9 */
 }
 
+#center-title{
+  text-align: center;
+}
+
 #content {
     overflow: hidden;
     width: 100%;
     height: 250px;
     position: absolute;
     background: #000000;
+    z-index: -1;
     color: #FFFFFF;
     line-height: 530px;
     text-align: center;
