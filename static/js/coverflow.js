@@ -2,11 +2,13 @@ var finalCount;
 var user_likes;
 var user_friends;
 var currentIndex;
+var siteId;
 var searching = 'Searching Products for "';
 var dots = '"...';
 
  function _cb_findItemsByKeywords(root) {
     var results = JSON.parse(root.results);
+    console.log(results);
     var items = results.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     var innerHTML = '';
     if (items.length) {
@@ -101,7 +103,7 @@ function loadProductsForLike(like) {
             _cb_findItemsByKeywords(JSON.parse(xobj.responseText));
         }
     };
-    xobj.send("{'likeId':'"+like.id+"', 'likeName':'"+like.name+"'}");  
+    xobj.send("{'likeId':'"+like.id+"', 'likeName':'"+like.name+"', 'siteId':'"+siteId+"'}");  
 }
 
 
