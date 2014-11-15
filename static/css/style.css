@@ -221,6 +221,7 @@ aside {
     margin-left: 5px;
     border-radius: 5px;
     position: absolute;
+    background-size: cover;
 }
 
 
@@ -236,6 +237,9 @@ aside {
   top: 320px;
 }
 
+#tab_text {
+  text-align: center;
+}
 
 #friends_table_header {
   position: absolute;

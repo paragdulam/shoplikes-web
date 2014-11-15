@@ -25,6 +25,7 @@
 		    // app know the current login status of the person.
 		    // Full docs on the response object can be found in the documentation
 		    // for FB.getLoginStatus().
+		    loadCountries();
 		    if (response.status === 'connected') {
 		    	user_friends = [];
 		        var currentUser = {"id":response.authResponse.userID,"name":"Me"};
@@ -132,6 +133,14 @@
 			    getLikesForUserID(friend);
 			}
 
+			function selectedCountry(index) {
+				var country = countries[index];
+				siteId = country.globalid;
+				console.log(siteId);
+				loadProductsForLike(user_likes[currentIndex]);
+				document.getElementById('country-name').innerHTML = country.name;
+			}
+
 		  function getLikesForUserID(user) {
 		  	var innerHTML = '';
 		  	var name = 'My Likes'
@@ -149,11 +158,31 @@
 
 		  //Read External JSON File
 
+		  	function loadCountries() {   
+	    		var xobj = new XMLHttpRequest();
+	        	xobj.overrideMimeType("application/json");
+				xobj.open('GET', "{{url_for('static',filename='res/countries.json')}}", true); // Replace 'my_data' with the path to your file
+				xobj.onreadystatechange = function () {
+	          	if (xobj.readyState == 4 && xobj.status == "200") {
+	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+    				  	countries = JSON.parse(xobj.responseText); 
+    				  	console.log(countries);
+    				  	innerHTML = '';
+    				  	for (var i = 0; i < countries.length; i++) {
+    				  		var country = countries[i];
+    				  		innerHTML += '<li><div onclick="selectedCountry('+i+')"><a href="#">'+country.name+'</a></div></li>'; 	  	
+    				  	}
+    				  	document.getElementById('dropdown').innerHTML = innerHTML;
+    				  	document.getElementById('country-name').innerHTML = countries[0].name;
+    				  	selectedCountry(0);
+	          		}
+	    		};
+	    		xobj.send(null);  
+ 			}
+
+
 		   function loadJSON() {   
 		   		populateFriendsTableView([]); //showing No Friends 
-		   		// var innerHTML = 'ShopLikes';
-		    	// innerHTML += '<a href=#openModal><img id="logo" src="static/img/logo.png"/></a><img id="facebook" src="static/img/facebook.png" onclick="login()"/>';
-		    	// document.getElementById('navigationBar').innerHTML = innerHTML;
 
 	    		var xobj = new XMLHttpRequest();
 	        	xobj.overrideMimeType("application/json");
@@ -189,29 +218,8 @@
 		<div id="main_content">
 			<div id="navigationBar">
 				<a href="#openModal"><img id="logo" src="{{url_for('static', filename='img/logo.png')}}"/></a>
-				<div class="select-country"><a href="#">United States</a>
-					<ul>
-						<li><a href="#">United States</a></li>
-						<li><a href="#">Canada(English)</a></li>
-						<li><a href="#">UK</a></li>
-						<li><a href="#">Australia</a></li>
-						<li><a href="#">Austria</a></li>
-						<li><a href="#">Belgium(French)</a></li>
-						<li><a href="#">France</a></li>
-						<li><a href="#">Germany</a></li>
-						<li><a href="#">Italy</a></li>
-						<li><a href="#">Belgium(Dutch)</a></li>
-						<li><a href="#">Netherlands</a></li>
-						<li><a href="#">Spain</a></li>
-						<li><a href="#">Switzerland</a></li>
-						<li><a href="#">Hong Kong</a></li>
-						<li><a href="#">India</a></li>
-						<li><a href="#">Ireland</a></li>
-						<li><a href="#">Malaysia</a></li>
-						<li><a href="#">Canada(French)</a></li>
-						<li><a href="#">Philippines</a></li>
-						<li><a href="#">Poland</a></li>
-						<li><a href="#">Singapore</a></li>
+				<div class="select-country"><a id="country-name" href="#">Loading...</a>
+					<ul id="dropdown">
 					</ul>
 				</div>
 				<div id='center-title'>ShopLikes</div>
@@ -232,7 +240,7 @@
 	  		</div>
 
 	  		<div id="navigationBar" style="bottom:0;position:absolute;color:#FFFFFF">
-	  			<a href="mailto:paragdulam@gmail.com" style="text-decoration:none;display: block;font-family: Helvetica, Sans-Serif;font-size: 14pt;color:#FFFFFF"><div>Contact Us</div></a>
+	  			<a href="mailto:paragdulam@gmail.com" style="text-decoration:none;display: block;font-family: Helvetica, Sans-Serif;font-size: 14pt;color:#FFFFFF"><div id="tab_text">Contact Us</div></a>
 	  		</div>
 		</div>
 	</body>

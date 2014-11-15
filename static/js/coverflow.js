@@ -2,7 +2,8 @@ var finalCount;
 var user_likes;
 var user_friends;
 var currentIndex;
-var siteId;
+var siteId = 'EBAY-US';
+var countries;
 var searching = 'Searching Products for "';
 var dots = '"...';
 
