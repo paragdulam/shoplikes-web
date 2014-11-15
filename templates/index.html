@@ -136,7 +136,6 @@
 			function selectedCountry(index) {
 				var country = countries[index];
 				siteId = country.globalid;
-				console.log(siteId);
 				loadProductsForLike(user_likes[currentIndex]);
 				document.getElementById('country-name').innerHTML = country.name;
 			}
@@ -166,7 +165,6 @@
 	          	if (xobj.readyState == 4 && xobj.status == "200") {
 	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
     				  	countries = JSON.parse(xobj.responseText); 
-    				  	console.log(countries);
     				  	innerHTML = '';
     				  	for (var i = 0; i < countries.length; i++) {
     				  		var country = countries[i];
