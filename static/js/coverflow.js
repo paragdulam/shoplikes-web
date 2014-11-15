@@ -9,7 +9,6 @@ var dots = '"...';
 
  function _cb_findItemsByKeywords(root) {
     var results = JSON.parse(root.results);
-    console.log(results);
     var items = results.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     var innerHTML = '';
     if (items.length) {
@@ -32,7 +31,7 @@ var dots = '"...';
     }
     var innHTML = document.getElementById("table_header").innerHTML;
     var currLike = user_likes[currentIndex];
-    if (currLike.id == root.likeId) {
+    if (currLike.id == root.likeId && siteId == root.siteId) {
         document.getElementById("table_view").innerHTML = innerHTML;
         document.getElementById("table_header").innerHTML = root.likeName + '('+items.length+')';
     }
