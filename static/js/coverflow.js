@@ -11,6 +11,9 @@ var dots = '"...';
     var results = JSON.parse(root.results);
     var items = results.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     var innerHTML = '';
+    var _trackEvent = '_trackEvent';
+    var purchase = 'Purchase';
+    var ebay = 'Ebay';
     if (items.length) {
         for (var i = 0; i < items.length; ++i) {
             var item     = items[i];
@@ -19,11 +22,12 @@ var dots = '"...';
             var category = item.primaryCategory[0].categoryName[0];
             var viewitem = item.viewItemURL;
             var color = '#FFFFFF';
+
             if (null != title && null != viewitem) {
                 if (i % 2 == 0) {
                     color = '#F2F2F2';
                 }
-                innerHTML += '<div class="product_cell" style="background-color:'+color+'"><img class="product_cell_image" src="' + pic + '"/><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" target="_blank" style="color: #FFFFFF">Buy</a></div></div>';
+                innerHTML += '<div class="product_cell" style="background-color:'+color+'"><img class="product_cell_image" src="' + pic + '"/><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" target="_blank" style="color: #FFFFFF" onclick="_gaq.push(['+_trackEvent+','+purchase+','+ebay+','+title+'])" >Buy</a></div></div>';
             }
         }
     } else {
@@ -31,7 +35,7 @@ var dots = '"...';
     }
     var innHTML = document.getElementById("table_header").innerHTML;
     var currLike = user_likes[currentIndex];
-    if (currLike.id == root.likeId && siteId == root.siteId) {
+    if (currLike.id == root.likeId) {
         document.getElementById("table_view").innerHTML = innerHTML;
         document.getElementById("table_header").innerHTML = root.likeName + '('+items.length+')';
     }

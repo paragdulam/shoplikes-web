@@ -16,6 +16,7 @@ def index(name=None):
 @app.route("/products", methods=['POST'])
 def getProductsforLike():
 	params = ast.literal_eval(request.data)
+	print params
 	likeId = params['likeId']
 	likeName = params['likeName']
 	siteId = params['siteId']
