@@ -235,6 +235,8 @@ aside {
 
 .product_cell_image img {
   border-radius: 5px;
+  width: 100%;
+  max-height: 100%
 }
 
 
