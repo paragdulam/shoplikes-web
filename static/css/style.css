@@ -36,7 +36,6 @@ aside {
 }
 
 .select-country ul {
-  display: none;
   list-style-type: none;
   max-height: 200px;
   overflow: auto;
@@ -45,11 +44,21 @@ aside {
   border-radius: 2px;
   background: #036FBA;
   width: 120px;
+  height: 0;
+
+  -webkit-transition: height .3s;
+  -moz-transition: height .3s;
+  transition: height .3s;
 }
 
 .select-country:hover ul {
-  display: block;
+  height: 200px;
+
+  -webkit-transition: height .3s;
+  -moz-transition: height .3s;
+  transition: height .3s;
 }
+
 
 .select-country ul li {
   text-decoration: none;
@@ -208,7 +217,7 @@ aside {
 
 
 .product_cell {
-    width: 100%;
+    width: 50%;
     height: 100px;
     position: relative;
 }
@@ -342,6 +351,13 @@ aside {
     position: absolute;
     left: 5px;
     bottom: 5px;
+}
+
+#facebook:hover {
+  background: #036FBA;
+  -webkit-transition: background .3s;
+  -moz-transition: background .3s;
+  transition: background .3s;
 }
 
 #facebook {
