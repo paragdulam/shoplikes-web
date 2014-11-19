@@ -22,11 +22,11 @@ var dots = '"...';
             var category = item.primaryCategory[0].categoryName[0];
             var viewitem = item.viewItemURL;
             var color = '#F2F2F2';
-            var element_float = 'left';
+            var element_float = 'right';
 
             if (null != title && null != viewitem) {
                 if (i % 2 == 0) {
-                    element_float = 'right';
+                    element_float = 'left';
                 }
                 innerHTML += '<div class="product_cell" style="background-color:'+color+';float:'+element_float+'"><img class="product_cell_image" src="' + pic + '"/><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" target="_blank" style="color: #FFFFFF" onclick="_gaq.push(['+_trackEvent+','+purchase+','+ebay+','+title+'])" >Buy</a></div></div>';
             }
