@@ -233,6 +233,10 @@ aside {
     background-size: cover;
 }
 
+.product_cell_image img {
+  border-radius: 5px;
+}
+
 
 #friends_table_view {
   width: 25%;
