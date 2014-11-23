@@ -28,7 +28,7 @@ var dots = '"...';
                 if (i % 2 == 0) {
                     element_float = 'left';
                 }
-                innerHTML += '<div class="product_cell" style="background-color:'+color+';float:'+element_float+'"><div class="product_cell_image"><img style="width:100%" src="' + pic + '"/></div><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" target="_blank" style="color: #FFFFFF" onclick="ga.push(['+_trackEvent+','+purchase+','+ebay+','+title+'])" >Buy</a></div></div>';
+                innerHTML += '<div class="product_cell" style="background-color:'+color+';float:'+element_float+'"><div class="product_cell_image"><img style="width:100%" src="' + pic + '"/></div><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" target="_blank" style="color: #FFFFFF" onclick="ga('+_trackEvent+','+purchase+','+ebay+','+title+')" >Buy</a></div></div>';
             }
         }
     } else {
