@@ -14,6 +14,7 @@ var dots = '"...';
     var _trackEvent = 'event';
     var purchase = 'Purchase';
     var ebay = 'Ebay';
+    var send = 'send';
     if (items.length) {
         for (var i = 0; i < items.length; ++i) {
             var item     = items[i];
@@ -29,7 +30,8 @@ var dots = '"...';
                     element_float = 'left';
                 }
                 //ga('send', 'event', 'Clicks', 'Logo', 'First Screen')
-                innerHTML += '<div class="product_cell" style="background-color:'+color+';float:'+element_float+'"><div class="product_cell_image"><img style="width:100%" src="' + pic + '"/></div><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" target="_blank" style="color: #FFFFFF" onclick="ga("'+send+'","'+_trackEvent+'","'+purchase+'","'+ebay+'","'+title+'")" >Buy</a></div></div>';
+                var analytics = '"ga(\''+send+'\',\''+_trackEvent+'\',\''+purchase+'\',\''+ebay+'\',\''+title+'\')"';
+                innerHTML += '<div class="product_cell" style="background-color:'+color+';float:'+element_float+'"><div class="product_cell_image"><img style="width:100%" src="' + pic + '"/></div><div class="title_text">'+title+'</div><div class="subtitle_text">'+category+'</div><div class="buy_button"><a href="'+viewitem+'" target="_blank" style="color: #FFFFFF" onclick='+analytics+'>Buy</a></div></div>';
             }
         }
     } else {
