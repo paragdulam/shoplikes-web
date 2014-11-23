@@ -171,7 +171,7 @@
     				  	var ebay = 'ebay';
     				  	for (var i = 0; i < countries.length; i++) {
     				  		var country = countries[i];
-							innerHTML += '<li><div onclick="selectedCountry('+i+'); ga.push(['+trackEvent+','+countrySelect+','+ebay+',"+country.name+"]); "><a href="#">'+country.name+'</a></div></li>';
+							innerHTML += '<li><div onclick="selectedCountry('+i+');"><a href="#" onclick="ga.push(['+trackEvent+','+countrySelect+','+ebay+',"+country.name+"])">'+country.name+'</a></div></li>';
     				  	}
     				  	document.getElementById('dropdown').innerHTML = innerHTML;
     				  	document.getElementById('country-name').innerHTML = countries[0].name;
