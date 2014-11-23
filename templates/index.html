@@ -166,14 +166,15 @@
 	            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
     				  	countries = JSON.parse(xobj.responseText); 
     				  	innerHTML = '';
-    				  	var trackEvent = '\'_trackEvent\'';
-    				  	var countrySelect = '\'Country Select\'';
-    				  	var ebay = '\'ebay\'';
-    				  	var send = '\'send\'';
+    				  	var trackEvent = 'event';
+    				  	var countrySelect = 'Country Select';
+    				  	var ebay = 'ebay';
+    				  	var send = 'send';
     				  	for (var i = 0; i < countries.length; i++) {
     				  		var country = countries[i];
-    				  		//ga('send', 'event', 'Clicks', 'Logo', 'First Screen');
-							innerHTML += '<li><div onclick="selectedCountry('+i+');"><a href="#" onclick="ga('+send+','+trackEvent+','+countrySelect+','+ebay+','+country.name+')">'+country.name+'</a></div></li>';
+    				  		//ga('send', 'event', 'Clicks', 'Logo', 'First Screen')
+    				  		var analytics = '"ga(\''+send+'\',\''+trackEvent+'\',\''+countrySelect+'\',\''+ebay+'\',\''+country.name+'\')"';
+							innerHTML += '<li><div onclick="selectedCountry('+i+');"><a href="#" onclick='+analytics+'>'+country.name+'</a></div></li>';
     				  	}
     				  	document.getElementById('dropdown').innerHTML = innerHTML;
     				  	document.getElementById('country-name').innerHTML = countries[0].name;
