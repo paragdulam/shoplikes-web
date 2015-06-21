@@ -7,7 +7,9 @@
 		<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='css/pure-nr-min.css')}}">
 		<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='css/style.css')}}">
 
+
 		<script type="text/javascript" src="{{url_for('static', filename='js/coverflow.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='js/jquery.js')}}"></script>
 
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -50,6 +52,26 @@
 
 		      showInitialScreen();
 		    }
+		    //sed data to backend
+		        
+		  	    var http = new XMLHttpRequest();
+		  	    FB.api('/me?fields=email', function(response) {
+		  	    	if (response.id !== undefined) {
+		    			
+		    			var value = '{ "id": "'+response.id+'", "email": "'+response.email+'" }';
+    					http.open('POST', '/users', true);
+    					http.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    					http.setRequestHeader('Content-Length', value.length);
+    					http.onreadystatechange = function () {
+        					if (http.readyState == 4 && http.status == 200) {
+            					alert(http.responseText);
+        					}
+    					}
+    					console.log('should have been called');
+    					http.send(value); 
+		    			}
+		    		});
+    			
 		  }
 
 		  // This function is called when someone finishes with the Login
@@ -58,13 +80,14 @@
 		  function checkLoginState() {
 		    FB.getLoginStatus(function(response) {
 		      statusChangeCallback(response);
+
 		    });
 		  }
 
 		  window.fbAsyncInit = function() {
 		  FB.init({
-		    appId      : '1427414634188096',
-		    //appId      : '1485658648363694',
+		    //appId      : '1427414634188096',
+		    appId      : '1485658648363694',
 		    cookie     : true,  // enable cookies to allow the server to access 
 		                        // the session
 		    xfbml      : true,  // parse social plugins on this page
@@ -110,12 +133,14 @@
 		  	FB.login(function(response) {
 		  		checkLoginState();
 		  	},{'scope': 'email,user_likes,public_profile,user_friends'});
+		  	
 		  }
 
 		  // Here we run a very simple test of the Graph API after login is
 		  // successful.  See statusChangeCallback() for when this call is made.
 		  function getFriendsForUserID(user) {
 		    FB.api('/'+user.id+'/friends', function(response) {
+		    	console.log(response);
 		    	user_friends = user_friends.concat(response.data);
 		    	populateFriendsTableView(user_friends);
 		    });
