@@ -2,7 +2,7 @@ webapp2==2.5.2
 wsgiref==0.1.2
 requests==2.3.0
 py2app==0.7.3
-Flask==0.10.1
+Flask==1.0
 Flask-Babel==0.9
 Flask-HTTPAuth==2.2.1
 Flask-Login==0.2.11
